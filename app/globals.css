@@ -164,6 +164,67 @@
   @media (min-width: 48rem) { .sunrise { --sun: min(40vw, 38svh, 24rem); } }
   @media (min-width: 48rem) and (max-height: 50rem) { .sunrise { --sun: min(40vw, 30svh, 24rem); } }
 
+  /* ---------- 404 scene ---------- */
+  .nf-stage { --nf-sun: min(74vw, 29rem); --nf-panel: min(86vw, 34rem); }
+  .nf-sky {
+    background:
+      radial-gradient(80% 70% at 50% 82%, rgba(227, 154, 46, 0.45) 0%, rgba(150, 88, 24, 0.18) 40%, transparent 72%);
+    animation: nfFade 2.4s var(--ease-out-expo) both;
+  }
+  .nf-sun { transform: translate(-50%, 34%); animation: nfSunUp 2.6s var(--ease-out-expo) both; }
+  .nf-disc { background: radial-gradient(circle at 50% 30%, #f6c46a 0%, #eaa53a 45%, #d98b1f 100%); }
+  .nf-halo { inset: -45%; background: radial-gradient(closest-side, rgba(240, 178, 74, 0.38), rgba(227, 154, 46, 0.12) 55%, transparent); }
+  .nf-rays { animation: nfRays 1.2s var(--ease-out-expo) 1.5s both; transform-origin: 50% 50%; }
+  .nf-glint { animation: nfGlint 0.9s var(--ease-out-expo) both; }
+  .nf-panel {
+    --rx: 16deg; --ry: -8deg; --sheen: 40%;
+    transform: rotateX(var(--rx)) rotateY(var(--ry));
+    transform-style: preserve-3d;
+    transition: transform 700ms var(--ease-out-expo);
+    animation: nfPanelIn 1.4s var(--ease-out-expo) 0.3s backwards; /* backwards: once it ends, the tilt transition takes over */
+  }
+  .nf-sway { animation: nfPanelIn 1.4s var(--ease-out-expo) 0.3s backwards, nfSway 9s ease-in-out 1.8s infinite; }
+  .nf-cell {
+    aspect-ratio: 1;
+    border-radius: 1px;
+    background: linear-gradient(160deg, #1d2d48 0%, #0f1b2e 60%, #132238 100%);
+    box-shadow: inset 0 0 0 0.5px rgba(160, 180, 210, 0.18);
+  }
+  .nf-lit { animation: nfCell 0.5s var(--ease-out-expo) both; }
+  .nf-sheen {
+    background: linear-gradient(115deg, transparent calc(var(--sheen) - 22%), rgba(255, 255, 255, 0.13) var(--sheen), transparent calc(var(--sheen) + 18%));
+    transition: background 700ms var(--ease-out-expo);
+  }
+  @keyframes nfSunUp { from { transform: translate(-50%, 102%); } to { transform: translate(-50%, 34%); } }
+  @keyframes nfFade { from { opacity: 0; } to { opacity: 1; } }
+  @keyframes nfRays { from { opacity: 0; transform: scale(0.85) rotate(-8deg); } to { opacity: 1; transform: none; } }
+  @keyframes nfGlint { from { opacity: 0; transform: scaleX(0.2); } }
+  @keyframes nfPanelIn { from { opacity: 0; transform: rotateX(60deg) rotateY(0deg) translateY(30px); } }
+  @keyframes nfSway {
+    0%, 100% { transform: rotateX(16deg) rotateY(-14deg); }
+    50% { transform: rotateX(10deg) rotateY(14deg); }
+  }
+  @keyframes nfCell {
+    from { background: linear-gradient(160deg, #1d2d48, #0f1b2e); box-shadow: none; }
+    to {
+      background: radial-gradient(circle at 40% 35%, #ffd98a 0%, #f0b24a 55%, #d98b1f 100%);
+      box-shadow: 0 0 6px 1px rgba(240, 178, 74, 0.7), inset 0 0 0 0.5px rgba(255, 230, 170, 0.6);
+    }
+  }
+  .nf-lit { animation-fill-mode: both; }
+  @media (prefers-reduced-motion: reduce) {
+    .nf-sky, .nf-sun, .nf-rays, .nf-glint, .nf-panel, .nf-sway { animation: none; }
+    .nf-lit {
+      animation: none;
+      background: radial-gradient(circle at 40% 35%, #ffd98a 0%, #f0b24a 55%, #d98b1f 100%);
+      box-shadow: 0 0 6px 1px rgba(240, 178, 74, 0.7);
+    }
+  }
+
+  /* image cycle progress line */
+  .cycle-progress { animation: cycleProgress linear both; }
+  @keyframes cycleProgress { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+
   /* endless word line */
   .marquee-track { animation: marquee var(--marquee-duration, 46s) linear infinite; }
   .marquee:hover .marquee-track,

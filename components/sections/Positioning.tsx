@@ -1,7 +1,7 @@
 import { home } from "@/content/home";
 import { images } from "@/content/images";
 import { Statement } from "@/components/ui/Statement";
-import { ImagePanel } from "@/components/ui/ImagePanel";
+import { ImageCycle } from "@/components/motion/ImageCycle";
 import { ImageReveal } from "@/components/motion/ImageReveal";
 import { MaskedHeading } from "@/components/motion/MaskedHeading";
 import { Reveal } from "@/components/motion/Reveal";
@@ -28,12 +28,8 @@ export function Positioning() {
           </div>
           <div className="lg:col-span-5 lg:col-start-8">
             <ImageReveal>
-              <ImagePanel image={images.agrivoltaicRows} cut="br" sizes="(min-width:1024px) 40vw, 100vw" className="aspect-[4/5]" imgClassName="object-[60%_50%]" />
+              <ImageCycle slides={p.slides.map((sl) => ({ image: images[sl.image], caption: sl.caption }))} />
             </ImageReveal>
-            <div className="mt-3 flex justify-between text-label text-ink-soft">
-              <span>{images.agrivoltaicRows.alt}</span>
-              <span className="font-tzar text-[0.95rem] tabular">(01)</span>
-            </div>
           </div>
         </div>
       </div>
