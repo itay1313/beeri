@@ -1,18 +1,19 @@
 import Link from "next/link";
 import { cn } from "@/lib/cn";
 
-type Variant = "primary" | "dark" | "ghost";
+type Variant = "primary" | "dark" | "ghost" | "ghost-dark";
 
 const base =
-  "group inline-flex items-center justify-center gap-3 font-medium text-[1.0625rem] leading-none transition-[background-color,color,border-color,transform] duration-200 ease-out-expo select-none";
+  "group inline-flex items-center justify-center font-medium leading-none rounded-full transition-[background-color,color,border-color,transform] duration-200 ease-out-expo select-none";
+
+/** Default size. Pass `size: "custom"` to buttonClass() and supply your own sizing instead. */
+const sizeMd = "gap-3 min-h-[3.25rem] px-7 text-[1.0625rem]";
 
 const variants: Record<Variant, string> = {
-  primary:
-    "bg-amber-500 text-cell-950 hover:bg-amber-400 active:translate-y-px min-h-[3.25rem] px-7 rounded-full",
-  dark:
-    "bg-cell-950 text-limestone hover:bg-cell-800 active:translate-y-px min-h-[3.25rem] px-7 rounded-full",
-  ghost:
-    "border border-ink/25 text-ink hover:border-ink min-h-[3.25rem] px-7 rounded-full",
+  primary: "bg-amber-500 text-cell-950 hover:bg-amber-400 active:translate-y-px",
+  dark: "bg-cell-950 text-limestone hover:bg-cell-800 active:translate-y-px",
+  ghost: "border border-ink/25 text-ink hover:border-ink",
+  "ghost-dark": "border border-limestone/30 text-limestone hover:border-limestone",
 };
 
 /**
@@ -48,8 +49,16 @@ type Props = {
   children: React.ReactNode;
 } & Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, "className" | "children">;
 
+/**
+ * Button styling for plain anchors (tel:, mailto:, external). With size "custom" no sizing classes are
+ * added, so the caller's min-height / padding / font size apply without fighting the defaults.
+ */
+export function buttonClass(variant: Variant = "primary", className?: string, size: "md" | "custom" = "md") {
+  return cn(base, variants[variant], size === "md" && sizeMd, className);
+}
+
 export function Button({ href, variant = "primary", arrow = false, className, children, ...rest }: Props) {
-  const cls = cn(base, variants[variant], className);
+  const cls = cn(base, variants[variant], sizeMd, className);
   if (href) {
     return (
       <Link href={href} className={cls}>

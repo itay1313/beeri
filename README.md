@@ -39,7 +39,7 @@ pnpm lint
 | Fonts (Ploni / Ploni Tzar, self-hosted) | `app/fonts.ts`, `public/fonts/` |
 | Sections | `components/sections/*` |
 | Visuals: dot field, plot drawing, flow diagram, roof schematic | `components/visuals/*` |
-| Contact form action (Resend) | `app/actions/contact.ts` |
+| Contact section (phone, WhatsApp, email per founder) | `components/sections/Contact.tsx`, numbers in `content/site.ts` |
 | SEO: metadata, OG image, sitemap, robots, JSON-LD | `app/layout.tsx`, `app/opengraph-image.tsx`, `app/sitemap.ts`, `app/robots.ts`, `lib/schema.ts` |
 | Old Wix store URLs → home | `next.config.ts` (`redirects`) |
 
@@ -74,17 +74,11 @@ Line breaks in the hero headline are authored in `home.hero.titleLines`.
 Drop the new file in `public/images/`, update the entry in `content/images.ts` (src, alt, width, height) and set
 `placeholder: false`. Entries with `placeholder: true` mark images to replace with real project photography; nothing renders differently.
 
-## Contact form
+## Contact
 
-Set in `.env.local` (see `.env.example`):
-
-```
-RESEND_API_KEY=...
-CONTACT_TO_EMAIL=Michael@beeri-energy.com,Itamar@beeri-energy.com
-CONTACT_FROM_EMAIL="BE'ERI Website <site@beeri-energy.com>"   # after verifying the domain in Resend
-```
-
-Without keys, development logs submissions to the terminal and shows the success state.
+There is no form. The contact section lists each founder with a tap-to-call number, a WhatsApp link
+(`wa.me`, prefilled message in `content/home.ts → contact.direct.whatsappText`) and a mailto link with a
+prefilled subject. Change numbers and addresses in `content/site.ts → people`.
 
 ## Fonts / license
 
@@ -97,5 +91,5 @@ beeri-energy.com only. Protect preview deployments (Vercel Deployment Protection
 
 ## Deploy
 
-Vercel: import the repo, add the env vars above, point `beeri-energy.com` (and `www`) to Vercel.
+Vercel: import the repo (no environment variables needed), point `beeri-energy.com` (and `www`) to Vercel.
 `www` is the canonical host (`content/site.ts → domain`).

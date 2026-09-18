@@ -228,20 +228,17 @@ export const home = {
       "השוואת חלופות: עם אגירה, בלי אגירה, מתח גבוה",
       "הערכת עלויות והכנסות ראשונית",
     ],
-    form: {
-      title: "השאירו פרטים",
-      name: "שם מלא",
-      phone: "טלפון",
-      email: "דוא״ל",
-      subject: "נושא",
-      subjectPlaceholder: "בחרו נושא",
-      message: "כמה מילים על המשק או הנכס",
-      messageHint: "לא חובה",
-      success: "תודה. קיבלנו את הפנייה ונחזור אליכם בהקדם.",
-      error: "משהו השתבש בשליחה. אפשר להתקשר אלינו ישירות.",
-      sending: "שולחים…",
+    direct: {
+      heading: "דברו איתנו ישירות",
+      sub: "טלפון, וואטסאפ או מייל, מה שנוח לכם.",
+      call: "התקשרו",
+      whatsapp: "וואטסאפ",
+      email: "שלחו מייל",
+      /** prefilled WhatsApp message */
+      whatsappText: "היי, הגעתי מהאתר של בארי אנרגיה ואשמח לשיחת ייעוץ.",
+      /** prefilled subject for mailto links */
+      mailSubject: "פנייה מהאתר: שיחת ייעוץ",
     },
-    peopleHeading: "או ישירות אלינו",
   },
 
   notFound: {
