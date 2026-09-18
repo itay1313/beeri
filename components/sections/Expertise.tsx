@@ -10,6 +10,8 @@ import { cn } from "@/lib/cn";
 
 const tileImages = [images.moshavAerial, images.barnBess, images.heroRows] as const;
 const cuts = ["tl", "tr", "tl"] as const;
+/** tile 3 reuses the hero photograph, so it is cropped into the panel rows instead of the sun */
+const crops = ["", "", "object-[50%_88%]"] as const;
 
 /** Three photographic panels on an offset grid; each links to its page. */
 export function Expertise() {
@@ -19,7 +21,7 @@ export function Expertise() {
       <div className="container-page section-y">
         <Reveal className="grid gap-8 lg:grid-cols-12 lg:items-end">
           <div className="lg:col-span-7">
-            <SectionHeading index={e.index} eyebrow="מה אנחנו עושים" title={e.heading} />
+            <SectionHeading index={e.index} eyebrow={e.eyebrow} title={e.heading} />
           </div>
           <p className="lg:col-span-4 lg:col-start-9 text-lede font-light text-ink-soft">{e.lede}</p>
         </Reveal>
@@ -34,7 +36,7 @@ export function Expertise() {
                     cut={cuts[i]}
                     sizes="(min-width:768px) 33vw, 100vw"
                     className="aspect-[3/4]"
-                    imgClassName="transition-transform duration-[1400ms] ease-out-expo group-hover:scale-[1.04]"
+                    imgClassName={`${crops[i]} transition-transform duration-[1400ms] ease-out-expo group-hover:scale-[1.04]`}
                   />
                 </ImageReveal>
                 <div className="mt-5 flex items-baseline justify-between gap-4 border-t border-line pt-4">

@@ -20,7 +20,7 @@ export function FounderCard({ person, tilt = 0, alt = false, full = false, class
       <p className="text-label text-amber-700 mt-2">{person.role}</p>
 
       <div className={cn("relative mx-auto mt-6 aspect-square w-[78%] bg-limestone", alt ? "collage-alt -rotate-3" : "collage rotate-3")}>
-        <Image src={person.portrait.src} alt={person.portrait.alt} fill sizes="(min-width:1024px) 22vw, 70vw" className="object-cover grayscale mix-blend-multiply scale-[1.12]" />
+        <Image src={person.portrait.src} alt="" fill sizes="(min-width:1024px) 22vw, 70vw" className="object-cover grayscale mix-blend-multiply scale-[1.12]" />
       </div>
 
       <p className="mt-6 text-[1.02rem] leading-snug text-ink-soft">{person.card.intro}</p>

@@ -1,6 +1,7 @@
 "use client";
 import { useRef } from "react";
 import { m, useInView } from "motion/react";
+import { useCapabilities } from "./useCapabilities";
 import { cn } from "@/lib/cn";
 
 /**
@@ -11,6 +12,8 @@ import { cn } from "@/lib/cn";
 export function ImageReveal({ children, className, delay = 0 }: { children: React.ReactNode; className?: string; delay?: number }) {
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { once: true, amount: 0.2 });
+  const { reducedMotion } = useCapabilities();
+  if (reducedMotion) return <div className={cn("relative", className)}>{children}</div>;
   const ease = [0.2, 0.7, 0.2, 1] as const;
   return (
     <div ref={ref} className={cn("relative", className)}>

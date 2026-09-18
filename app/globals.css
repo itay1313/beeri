@@ -19,29 +19,22 @@
   --color-dust: #e7dfcf;
   --color-line: #d3c9b6;
   --color-line-dark: rgba(242, 237, 227, 0.12);
-  --color-sage: #7e8b72;
   --color-transparent: transparent;
   --color-current: currentColor;
 
   --font-sans: var(--font-ploni), "Ploni", "Arial Hebrew", system-ui, sans-serif;
   --font-tzar: var(--font-ploni-tzar), "Ploni Tzar", var(--font-ploni), sans-serif;
 
-  --breakpoint-xs: 30rem;
-
   --container-page: 82.5rem; /* 1320px */
 
   --ease-out-expo: cubic-bezier(0.2, 0.7, 0.2, 1);
-  --ease-in-out-soft: cubic-bezier(0.65, 0, 0.35, 1);
 
   --radius-*: initial;
   --radius-none: 0;
   --radius-xs: 2px;
-  --radius-sm: 4px;
-  --radius-lg: 1.25rem;
   --radius-xl: 2rem;
   --radius-full: 9999px;
 
-  --animate-none: none;
 }
 
 :root {
@@ -53,7 +46,6 @@
   --text-body: 1.125rem;
   --text-small: 0.9375rem;
   --text-label: 0.8125rem;
-  --text-numeral: clamp(4rem, 2.5rem + 7vw, 10rem);
 
   /* rhythm */
   --section-y: clamp(4.5rem, 3rem + 6vw, 9.5rem);
@@ -119,19 +111,11 @@
     font-weight: 500;
     letter-spacing: 0.06em;
   }
-  .text-numeral {
-    font-family: var(--font-tzar);
-    font-size: var(--text-numeral);
-    line-height: 0.85;
-    font-weight: 700;
-    font-variant-numeric: tabular-nums;
-    letter-spacing: -0.02em;
-  }
+  /* hollow display numeral (2026 marker) */
+  .outline-numeral { color: transparent; -webkit-text-stroke: 1px color-mix(in srgb, var(--color-limestone) 45%, transparent); }
   .font-tzar { font-family: var(--font-tzar); font-variant-numeric: tabular-nums; }
   .tabular { font-variant-numeric: tabular-nums; }
 
-  .hairline { border-top: 1px solid var(--color-line); }
-  .hairline-dark { border-top: 1px solid var(--color-line-dark); }
 
   /* one 45° corner cut, echoing a PV module edge */
   .cut-tl { clip-path: polygon(var(--cut) 0, 100% 0, 100% 100%, 0 100%, 0 var(--cut)); }
@@ -139,14 +123,6 @@
   .cut-bl { clip-path: polygon(0 0, 100% 0, 100% 100%, var(--cut) 100%, 0 calc(100% - var(--cut))); }
   .cut-br { clip-path: polygon(0 0, 100% 0, 100% calc(100% - var(--cut)), calc(100% - var(--cut)) 100%, 0 100%); }
 
-  /* duotone photo: grayscale + limestone multiply + cell-950 lighten */
-  .duotone { isolation: isolate; }
-  .duotone > img { filter: grayscale(1) contrast(1.08); }
-  .duotone::before, .duotone::after {
-    content: ""; position: absolute; inset: 0; pointer-events: none;
-  }
-  .duotone::before { background: var(--color-limestone); mix-blend-mode: multiply; }
-  .duotone::after { background: var(--color-cell-950); mix-blend-mode: lighten; }
 
   /* 45° coverage hatch */
   .hatch {
@@ -158,14 +134,6 @@
   }
   .hatch-dark { --hatch-color: var(--color-line-dark); }
 
-  .sun-glow {
-    background: radial-gradient(
-      closest-side,
-      rgba(227, 154, 46, 0.55) 0%,
-      rgba(227, 154, 46, 0.18) 45%,
-      rgba(227, 154, 46, 0) 100%
-    );
-  }
 
   /* hero field fades under the headline (text sits at the inline start) */
 
@@ -175,12 +143,12 @@
     animation-delay: calc(120ms + var(--i, 0) * 80ms);
   }
   .hero-fade { animation: heroFade 1100ms ease-out both 200ms; }
-  .hero-photo { animation: heroPhoto 900ms var(--ease-out-expo) both 420ms; }
+  .hero-kenburns { animation: kenburns 18s var(--ease-out-expo) both; }
+  @keyframes kenburns { from { transform: scale(1.08) translateY(1.5%); } to { transform: scale(1) translateY(0); } }
   @keyframes heroIn { from { opacity: 0; transform: translateY(22px); } to { opacity: 1; transform: none; } }
   @keyframes heroFade { from { opacity: 0; } to { opacity: 1; } }
-  @keyframes heroPhoto { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: none; } }
   @media (prefers-reduced-motion: reduce) {
-    .hero-in, .hero-fade, .hero-photo, .hero-kenburns { animation: none; }
+    .hero-in, .hero-fade, .hero-kenburns { animation: none; }
   }
 
   /* collage-cut portrait: stepped polygon, echoing stacked PV modules */
@@ -198,9 +166,11 @@
 
   /* endless word line */
   .marquee-track { animation: marquee var(--marquee-duration, 46s) linear infinite; }
-  .marquee:hover .marquee-track { animation-play-state: paused; }
+  .marquee:hover .marquee-track,
+  .marquee.is-paused .marquee-track { animation-play-state: paused; }
+  .marquee-control { display: flex; }
   @keyframes marquee { to { transform: translateX(-50%); } }
-  @media (prefers-reduced-motion: reduce) { .marquee-track { animation: none; } }
+  @media (prefers-reduced-motion: reduce) { .marquee-track { animation: none; } .marquee-control { display: none; } }
 
   .visually-hidden {
     position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;

@@ -37,7 +37,7 @@ export function MobileNav({ light }: { light: boolean }) {
         type="button"
         onClick={open}
         aria-label="פתיחת תפריט"
-        className={cn("lg:hidden inline-flex size-11 items-center justify-center -me-2 rounded-xs", light ? "text-ink" : "text-limestone")}
+        className={cn("lg:hidden inline-flex size-11 items-center justify-center -me-2 rounded-full", light ? "text-ink" : "text-limestone")}
       >
         <svg aria-hidden="true" viewBox="0 0 24 24" className="size-6" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="square">
           <path d="M3 7h18M3 12h18M3 17h12" />

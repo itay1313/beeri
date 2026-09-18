@@ -5,10 +5,10 @@ import { Logo } from "./Logo";
 import { Wordmark } from "@/components/ui/Wordmark";
 import { Sunrise } from "@/components/visuals/Sunrise";
 
-export function Footer() {
+export function Footer({ sunrise = true }: { sunrise?: boolean }) {
   return (
     <footer data-tone="dark" className="bg-cell-950 text-limestone/70 overflow-x-clip">
-      <Sunrise />
+      {sunrise && <Sunrise />}
       <div className="relative">
         <div className="container-page py-12 grid gap-10 md:grid-cols-[auto_1fr_auto] md:items-start border-t border-line-dark">
           <Logo tone="paper" height={56} />
@@ -20,7 +20,7 @@ export function Footer() {
                 </li>
               ))}
               <li>
-                <Link href={site.contactPath} className="inline-flex min-h-6 items-center py-1 hover:text-limestone">צור קשר</Link>
+                <Link href={site.contactPath} className="inline-flex min-h-6 items-center py-1 hover:text-limestone">{site.contactLabel}</Link>
               </li>
             </ul>
           </nav>

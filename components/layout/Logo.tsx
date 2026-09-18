@@ -4,7 +4,7 @@ import { cn } from "@/lib/cn";
 import { site } from "@/content/site";
 
 /** Raster logo (client supplied no vector). Aspect 514×404. */
-export function Logo({ tone = "navy", className, height = 44 }: { tone?: "navy" | "paper"; className?: string; height?: number }) {
+export function Logo({ tone = "navy", className, height = 44, preload = false }: { tone?: "navy" | "paper"; className?: string; height?: number; preload?: boolean }) {
   const width = Math.round((514 / 404) * height);
   return (
     <Link href="/" aria-label={`${site.name} – דף הבית`} className={cn("inline-flex shrink-0", className)}>
@@ -13,7 +13,7 @@ export function Logo({ tone = "navy", className, height = 44 }: { tone?: "navy" 
         alt=""
         width={width}
         height={height}
-        priority
+        preload={preload}
         className="h-auto"
         style={{ width, height }}
       />

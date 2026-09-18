@@ -5,7 +5,7 @@ import { pages } from "@/content/pages";
 import { ImagePanel } from "@/components/ui/ImagePanel";
 import { ImageReveal } from "@/components/motion/ImageReveal";
 import { SectionHeading } from "@/components/ui/SectionHeading";
-import { ArrowIcon } from "@/components/ui/Button";
+import { TextLink } from "@/components/ui/TextLink";
 import { Reveal } from "@/components/motion/Reveal";
 import { specSheet } from "@/content/spec";
 import { CountUp } from "@/components/motion/CountUp";
@@ -19,7 +19,7 @@ export function LandTeaser() {
       <div className="container-page pt-[var(--section-y)]">
         <Reveal className="grid gap-8 lg:grid-cols-12 lg:items-end">
           <div className="lg:col-span-7">
-            <SectionHeading index={l.index} eyebrow="חלקה א׳" title={l.heading} />
+            <SectionHeading index={l.index} eyebrow={l.eyebrow} title={l.heading} />
           </div>
           <p className="lg:col-span-4 lg:col-start-9 text-ink-soft">{l.intro}</p>
         </Reveal>
@@ -51,19 +51,16 @@ export function LandTeaser() {
           <div className="mt-8 flex flex-wrap items-end justify-between gap-8">
             <dl className="grid grid-cols-3 gap-6 lg:gap-10">
               {facts.map((f) => (
-                <div key={f.label}>
+                <div key={f.label} className="flex flex-col-reverse">
+                  <dt className="text-label text-ink-soft mt-1 max-w-[14ch]">{f.label}</dt>
                   <dd className="flex items-baseline gap-1.5">
                     <CountUp value={f.value} className="font-tzar text-[2.2rem] lg:text-[2.6rem] font-bold leading-none text-ink" />
                     <span className="text-label text-amber-700">{f.unit}</span>
                   </dd>
-                  <dt className="text-label text-ink-soft mt-1 max-w-[14ch]">{f.label}</dt>
                 </div>
               ))}
             </dl>
-            <Link href={pages.nahala.path} className="group inline-flex items-center gap-3 font-medium text-ink border-b border-amber-500 pb-1 hover:text-amber-700">
-              כל הפרטים על חלקה א׳
-              <ArrowIcon />
-            </Link>
+            <TextLink href={pages.nahala.path}>{l.teaserLink}</TextLink>
           </div>
         </Reveal>
       </div>

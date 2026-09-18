@@ -1,6 +1,7 @@
 "use client";
 import { useRef } from "react";
-import { m, useMotionValue, useReducedMotion, useScroll, useSpring, useTransform } from "motion/react";
+import { m, useMotionValue, useScroll, useSpring, useTransform } from "motion/react";
+import { useCapabilities } from "@/components/motion/useCapabilities";
 import { site } from "@/content/site";
 import { PlotField } from "./PlotField";
 
@@ -16,7 +17,7 @@ const GLINTS = [0.92, 0.74, 0.58, 0.44, 0.32, 0.22];
  */
 export function Sunrise() {
   const ref = useRef<HTMLDivElement>(null);
-  const reduce = useReducedMotion();
+  const reduce = useCapabilities().reducedMotion;
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end end"] });
   const sprung = useSpring(scrollYProgress, { stiffness: 70, damping: 22, mass: 0.6 });
   const done = useMotionValue(1);

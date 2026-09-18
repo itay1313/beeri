@@ -6,15 +6,14 @@ type Props = {
   titleLines: readonly string[];
   lede?: string;
   image: SiteImage;
-  index?: string;
 };
 
 /** Inner-page opener: full-bleed photo, giant title at the inline start, lede below. */
-export function PageHero({ eyebrow, titleLines, lede, image, index }: Props) {
+export function PageHero({ eyebrow, titleLines, lede, image }: Props) {
   return (
     <section data-tone="dark" className="relative overflow-hidden bg-cell-950 text-limestone min-h-[72svh] lg:min-h-[78svh] flex flex-col justify-end">
       <div aria-hidden="true" className="absolute inset-0">
-        <Image src={image.src} alt="" fill priority sizes="100vw" className="object-cover hero-kenburns" />
+        <Image src={image.src} alt="" fill preload sizes="100vw" className="object-cover hero-kenburns" />
         {/* legibility: a flat base dim, a tall bottom fade under the text block, and a side fade on the text side (right in RTL) */}
         <div className="absolute inset-0 bg-cell-950/35" />
         <div className="absolute inset-0 bg-[linear-gradient(to_top,rgba(12,17,23,0.97)_0%,rgba(12,17,23,0.85)_30%,rgba(12,17,23,0.55)_58%,rgba(12,17,23,0.1)_85%,rgba(12,17,23,0.4)_100%)]" />
@@ -24,8 +23,7 @@ export function PageHero({ eyebrow, titleLines, lede, image, index }: Props) {
         <div className="lg:grid lg:grid-cols-12 lg:items-end gap-8">
           <div className="lg:col-span-8">
             <p className="hero-in text-label text-amber-400 mb-5 flex items-center gap-3 [text-shadow:0_1px_12px_rgba(12,17,23,0.8)]" style={{ ["--i" as string]: 0 }}>
-              {index && <span className="font-tzar text-[1.05rem] font-bold tracking-normal">{index}</span>}
-              {index && <span aria-hidden="true" className="block h-px w-8 bg-line-dark" />}
+              <span aria-hidden="true" className="block h-px w-8 bg-amber-400" />
               {eyebrow}
             </p>
             <h1 className="text-display text-limestone [text-shadow:0_2px_24px_rgba(12,17,23,0.45)]">

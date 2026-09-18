@@ -12,7 +12,8 @@ type Props = {
   gapRows?: number;
 };
 
-const LIME = [242, 237, 227] as const;
+/** RGB of --color-limestone and --color-amber-500 (canvas needs numbers) */
+const LIMESTONE = [242, 237, 227] as const;
 const AMBER = [227, 154, 46] as const;
 
 /**
@@ -22,7 +23,7 @@ const AMBER = [227, 154, 46] as const;
  */
 export function PlotField({ className, pitch = 16, rowsPerStrip = 5, gapRows = 3 }: Props) {
   const ref = useRef<HTMLCanvasElement>(null);
-  const caps = useCapabilities();
+  const { reducedMotion, hover, lowPower } = useCapabilities();
 
   useEffect(() => {
     const canvas = ref.current;
@@ -38,8 +39,8 @@ export function PlotField({ className, pitch = 16, rowsPerStrip = 5, gapRows = 3
     let dpr = 1;
     const mouse = { x: -9999, y: -9999, tx: -9999, ty: -9999 };
     const start = performance.now();
-    const p = caps.lowPower ? pitch * 1.5 : pitch;
-    const useWave = !caps.hover || caps.lowPower;
+    const p = lowPower ? pitch * 1.5 : pitch;
+    const useWave = !hover || lowPower;
     const radius = 220;
 
     const resize = () => {
@@ -87,8 +88,8 @@ export function PlotField({ className, pitch = 16, rowsPerStrip = 5, gapRows = 3
           const a = (0.18 + 0.55 * e) * breath;
           const rr = 1.1 + 1.1 * e;
           const col = e > 0.02
-            ? `rgba(${lerp(LIME[0], AMBER[0], e)}, ${lerp(LIME[1], AMBER[1], e)}, ${lerp(LIME[2], AMBER[2], e)}, ${a})`
-            : `rgba(${LIME[0]}, ${LIME[1]}, ${LIME[2]}, ${a})`;
+            ? `rgba(${lerp(LIMESTONE[0], AMBER[0], e)}, ${lerp(LIMESTONE[1], AMBER[1], e)}, ${lerp(LIMESTONE[2], AMBER[2], e)}, ${a})`
+            : `rgba(${LIMESTONE[0]}, ${LIMESTONE[1]}, ${LIMESTONE[2]}, ${a})`;
           ctx.fillStyle = col;
           ctx.beginPath();
           ctx.arc(x - drift, y, rr, 0, Math.PI * 2);
@@ -98,8 +99,11 @@ export function PlotField({ className, pitch = 16, rowsPerStrip = 5, gapRows = 3
     };
 
     const loop = (t: number) => {
-      if (!running) return;
-      if (visible) draw(t);
+      if (!running || !visible) {
+        raf = 0;
+        return;
+      }
+      draw(t);
       raf = requestAnimationFrame(loop);
     };
 
@@ -108,26 +112,34 @@ export function PlotField({ className, pitch = 16, rowsPerStrip = 5, gapRows = 3
       mouse.tx = e.clientX - rect.left;
       mouse.ty = e.clientY - rect.top;
     };
-    const onLeave = () => {
+    const onLeave = (e: PointerEvent) => {
+      if (e.relatedTarget) return; // only when the pointer leaves the window
       mouse.tx = -9999;
       mouse.ty = -9999;
     };
 
     resize();
-    if (caps.reducedMotion) {
+    if (reducedMotion) {
       draw(start + 1000); // one static frame
     } else {
       raf = requestAnimationFrame(loop);
       if (!useWave) {
         window.addEventListener("pointermove", onMove, { passive: true });
-        document.addEventListener("pointerleave", onLeave);
+        document.addEventListener("pointerout", onLeave);
       }
     }
-    const io = new IntersectionObserver(([en]) => (visible = en.isIntersecting), { threshold: 0 });
+    const io = new IntersectionObserver(
+      ([en]) => {
+        visible = en.isIntersecting;
+        // pause the loop entirely while off-screen; resume on re-entry
+        if (visible && running && !reducedMotion && !raf) raf = requestAnimationFrame(loop);
+      },
+      { threshold: 0 },
+    );
     io.observe(canvas);
     const ro = new ResizeObserver(() => {
       resize();
-      if (caps.reducedMotion) draw(start + 1000);
+      if (reducedMotion) draw(start + 1000);
     });
     ro.observe(canvas);
 
@@ -135,11 +147,11 @@ export function PlotField({ className, pitch = 16, rowsPerStrip = 5, gapRows = 3
       running = false;
       cancelAnimationFrame(raf);
       window.removeEventListener("pointermove", onMove);
-      document.removeEventListener("pointerleave", onLeave);
+      document.removeEventListener("pointerout", onLeave);
       io.disconnect();
       ro.disconnect();
     };
-  }, [caps, pitch, rowsPerStrip, gapRows]);
+  }, [reducedMotion, hover, lowPower, pitch, rowsPerStrip, gapRows]);
 
   return <canvas ref={ref} aria-hidden="true" className={cn("block h-full w-full", className)} />;
 }

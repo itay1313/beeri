@@ -51,10 +51,18 @@ pnpm lint
 | `BlurText` — word-by-word blur-in | section ledes, `Statement` paragraphs |
 | `CountUp` — numbers count up in view | תמ״א spec sheet, home land teaser |
 | `Magnetic` — CTA drifts toward the cursor | hero CTA, form submit, nahala CTA (pointer devices only) |
-| `Marquee` — endless CSS word line (always full, never scroll-dependent) | under the home and about heroes |
+| `Marquee` — endless CSS word line with a pause button | under the home and about heroes |
 | `ImageReveal` — photo un-clips from the bottom with a settle | positioning, expertise tiles, land aerial |
-| `Footer` — sticky reveal with a scroll-driven sunrise | every page |
-| `PlotField` / `EnergyFlowDiagram` / `RoofPlanSchematic` | footer sky, how-it-works, tariff |
+| `Sunrise` — scroll-driven sunrise above the footer (rises on scroll down, sets on scroll up) | every page except 404 and accessibility (`PageShell sunrise={false}`) |
+| `EnergyFlowDiagram` — day/peak states, pause button; horizontal on tablet+, vertical on phones | how-it-works |
+| `TariffChart` — one day against the connection cap, draws in on view | tariff teaser and /tariff |
+| `PlotField` — canvas dot field, paused off-screen | sunrise ground |
+
+## Shared UI
+
+`Button` (primary / dark / ghost pills), `TextLink` (underlined arrow link), `SectionHeading` (index + eyebrow + masked title;
+wrap words in `*asterisks*` in content to set them in Light), `PageHero`, `ImagePanel`, `FounderCard`, `PauseButton`.
+Section numbers restart on every page; pass `index` to `HowItWorks` / `Contact` when reusing them.
 
 ## Editing content
 

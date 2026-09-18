@@ -36,7 +36,7 @@ export function Hero() {
               </Magnetic>
               <Link href={h.secondary.href} className="group inline-flex items-center gap-2 font-medium text-limestone/85 hover:text-limestone">
                 {h.secondary.label}
-                <ArrowIcon className="rotate-90 rtl:rotate-90 rtl:scale-x-100 group-hover:translate-y-1 rtl:group-hover:translate-x-0" />
+                <ArrowIcon direction="down" />
               </Link>
             </div>
           </div>

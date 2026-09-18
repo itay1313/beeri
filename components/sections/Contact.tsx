@@ -2,8 +2,9 @@ import { home } from "@/content/home";
 import { site } from "@/content/site";
 import { ContactForm } from "./ContactForm";
 import { Reveal } from "@/components/motion/Reveal";
+import { SectionHeading } from "@/components/ui/SectionHeading";
 
-export function Contact({ variant = "home" }: { variant?: "home" | "page" }) {
+export function Contact({ variant = "home", index }: { variant?: "home" | "page"; index?: string }) {
   const c = home.contact;
   const page = variant === "page";
   return (
@@ -14,8 +15,7 @@ export function Contact({ variant = "home" }: { variant?: "home" | "page" }) {
           <div className="lg:col-span-5">
             {!page && (
               <Reveal>
-                <p className="text-label text-amber-400 mb-5">שיחת ייעוץ ללא התחייבות</p>
-                <h2 className="text-h2 text-limestone">{c.heading}</h2>
+                <SectionHeading index={index ?? c.index} eyebrow={c.eyebrow} title={c.heading} tone="dark" />
                 <p className="text-lede font-light text-limestone/80 mt-6 max-w-[40ch]">{c.lede}</p>
               </Reveal>
             )}

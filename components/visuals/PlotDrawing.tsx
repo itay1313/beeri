@@ -5,9 +5,10 @@ import { cn } from "@/lib/cn";
  * Percent-based viewBox so it stretches with its container; strokes stay 1px.
  */
 export function PlotDrawing({ className, dark = true, id = "plot" }: { className?: string; dark?: boolean; id?: string }) {
-  const line = dark ? "rgba(242,237,227,0.35)" : "rgba(27,39,51,0.35)";
-  const faint = dark ? "rgba(242,237,227,0.12)" : "rgba(27,39,51,0.12)";
-  const amber = "#e39a2e";
+  const base = dark ? "var(--color-limestone)" : "var(--color-ink)";
+  const line = `color-mix(in srgb, ${base} 35%, transparent)`;
+  const faint = `color-mix(in srgb, ${base} 12%, transparent)`;
+  const amber = "var(--color-amber-500)";
   return (
     <svg
       aria-hidden="true"

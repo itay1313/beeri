@@ -26,8 +26,7 @@ export function HeroMedia() {
         src={img.src}
         alt=""
         fill
-        priority
-        fetchPriority="high"
+        preload
         sizes="100vw"
         className={`object-cover object-[50%_28%] ${useVideo ? "" : "hero-kenburns"}`}
       />

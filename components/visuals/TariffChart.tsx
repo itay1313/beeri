@@ -56,29 +56,29 @@ export function TariffChart({ className }: { className?: string }) {
           <clipPath id="tc-below"><rect x="0" y={CAP} width={W} height={BASE - CAP} /></clipPath>
           <clipPath id="tc-above"><rect x="0" y="0" width={W} height={CAP} /></clipPath>
           <pattern id="tc-hatch" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(-45)">
-            <line x1="0" y1="0" x2="0" y2="6" stroke="#e39a2e" strokeWidth="1.4" />
+            <line x1="0" y1="0" x2="0" y2="6" stroke="var(--color-amber-500)" strokeWidth="1.4" />
           </pattern>
         </defs>
 
         {/* hour grid */}
         {[0, 6, 12, 18, 24].map((h) => (
           <g key={h}>
-            <line x1={x(h)} y1={TOP - 16} x2={x(h)} y2={BASE} stroke="rgba(242,237,227,0.08)" />
-            <text x={x(h)} y={BASE + 24} textAnchor="middle" fontSize="15" fill="rgba(242,237,227,0.6)" style={{ fontFamily: "var(--font-tzar)" }}>
+            <line x1={x(h)} y1={TOP - 16} x2={x(h)} y2={BASE} stroke="var(--color-limestone)" strokeOpacity="0.08" />
+            <text x={x(h)} y={BASE + 24} textAnchor="middle" fontSize="15" fill="var(--color-limestone)" fillOpacity="0.6" style={{ fontFamily: "var(--font-tzar)" }}>
               {String(h % 24).padStart(2, "0")}:00
             </text>
           </g>
         ))}
-        <line x1={X0} y1={BASE} x2={X1} y2={BASE} stroke="rgba(242,237,227,0.35)" />
+        <line x1={X0} y1={BASE} x2={X1} y2={BASE} stroke="var(--color-limestone)" strokeOpacity="0.35" />
 
         {/* exported: production under the cap */}
-        <m.path d={area} clipPath="url(#tc-below)" fill="rgba(242,237,227,0.14)" {...grow(0.1)} />
+        <m.path d={area} clipPath="url(#tc-below)" fill="var(--color-limestone)" fillOpacity="0.14" {...grow(0.1)} />
         {/* charged: production above the cap */}
         <m.path d={area} clipPath="url(#tc-above)" fill="url(#tc-hatch)" {...grow(0.35)} />
         {/* discharged at evening peak, at the cap */}
         <m.path
           d={`M ${x(18.5)},${BASE} L ${x(18.5)},${CAP} L ${x(22.5)},${CAP} L ${x(22.5)},${BASE} Z`}
-          fill="#e39a2e"
+          fill="var(--color-amber-500)"
           {...grow(1.1)}
         />
 
@@ -86,7 +86,7 @@ export function TariffChart({ className }: { className?: string }) {
         <m.path
           d={line}
           fill="none"
-          stroke="#f2ede3"
+          stroke="var(--color-limestone)"
           strokeWidth="1.75"
           initial={{ pathLength: 0 }}
           animate={{ pathLength: inView ? 1 : 0 }}
@@ -95,19 +95,19 @@ export function TariffChart({ className }: { className?: string }) {
 
         {/* connection cap */}
         <m.g {...show(0.6)}>
-          <line x1={X0} y1={CAP} x2={X1} y2={CAP} stroke="#f2ede3" strokeWidth="1" strokeDasharray="5 5" />
-          <text x={X1} y={CAP - 10} textAnchor="start" fontSize="15" fill="#f2ede3" direction="rtl">{c.cap}</text>
+          <line x1={X0} y1={CAP} x2={X1} y2={CAP} stroke="var(--color-limestone)" strokeWidth="1" strokeDasharray="5 5" />
+          <text x={X0 + 4} y={CAP - 10} textAnchor="end" fontSize="17" fill="var(--color-limestone)" direction="rtl">{c.cap}</text>
         </m.g>
 
         {/* labels */}
         <m.g {...show(0.9)}>
-          <text x={x(12)} y={TOP - 20} textAnchor="middle" fontSize="15" fill="#f0b24a" direction="rtl">{c.charge}</text>
-          <line x1={x(12)} y1={TOP - 14} x2={x(12)} y2={TOP + 30} stroke="#f0b24a" strokeWidth="1" />
-          <text x={x(12)} y={BASE - 20} textAnchor="middle" fontSize="15" fill="rgba(242,237,227,0.85)" direction="rtl">{c.export}</text>
+          <text x={x(12)} y={TOP - 20} textAnchor="middle" fontSize="17" fill="var(--color-amber-400)" direction="rtl">{c.charge}</text>
+          <line x1={x(12)} y1={TOP - 14} x2={x(12)} y2={TOP + 30} stroke="var(--color-amber-400)" strokeWidth="1" />
+          <text x={x(12)} y={BASE - 20} textAnchor="middle" fontSize="17" fill="var(--color-limestone)" direction="rtl">{c.export}</text>
         </m.g>
         <m.g {...show(1.5)}>
-          <text x={x(20.5)} y={CAP - 30} textAnchor="middle" fontSize="15" fill="#f0b24a" direction="rtl">{c.discharge}</text>
-          <line x1={x(20.5)} y1={CAP - 24} x2={x(20.5)} y2={CAP - 4} stroke="#f0b24a" strokeWidth="1" />
+          <text x={x(20.5)} y={CAP - 30} textAnchor="middle" fontSize="17" fill="var(--color-amber-400)" direction="rtl">{c.discharge}</text>
+          <line x1={x(20.5)} y1={CAP - 24} x2={x(20.5)} y2={CAP - 4} stroke="var(--color-amber-400)" strokeWidth="1" />
         </m.g>
       </svg>
       <p className="mt-5 text-small text-limestone/70 max-w-[46ch]">{c.caption}</p>

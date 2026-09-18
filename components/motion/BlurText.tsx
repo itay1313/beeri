@@ -1,5 +1,6 @@
 "use client";
 import { m } from "motion/react";
+import { useCapabilities } from "./useCapabilities";
 import { cn } from "@/lib/cn";
 
 type Props = {
@@ -13,6 +14,14 @@ type Props = {
 
 /** Word-by-word blur-in on view (React Bits "Blur Text", reinterpreted). For ledes and statements, never body copy. */
 export function BlurText({ text, className, as: Tag = "p", delay = 0, stagger = 0.022, children }: Props) {
+  const { reducedMotion } = useCapabilities();
+  if (reducedMotion) {
+    return (
+      <Tag className={cn(className)}>
+        {text} {children}
+      </Tag>
+    );
+  }
   const words = text.split(" ");
   return (
     <Tag className={cn(className)}>

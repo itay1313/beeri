@@ -59,12 +59,12 @@ export function Header() {
     >
       <a
         href="#main"
-        className="visually-hidden focus:not-sr-only focus:absolute focus:top-3 focus:right-3 focus:z-[100] focus:bg-amber-500 focus:text-cell-950 focus:px-4 focus:py-2 focus:rounded-full focus:[clip:auto] focus:[width:auto] focus:[height:auto]"
+        className="visually-hidden focus:not-sr-only focus:absolute focus:top-3 focus:start-3 focus:z-[100] focus:bg-amber-500 focus:text-cell-950 focus:px-4 focus:py-2 focus:rounded-full focus:[clip:auto] focus:[width:auto] focus:[height:auto]"
       >
         דלגו לתוכן
       </a>
       <div className="container-page flex h-[4.5rem] items-center justify-between gap-6">
-        <Logo tone={light ? "navy" : "paper"} height={40} />
+        <Logo tone={light ? "navy" : "paper"} height={40} preload />
 
         <nav aria-label="ניווט ראשי" className="hidden lg:block">
           <ul className="flex items-center gap-7">

@@ -7,8 +7,11 @@ export const subjectOptions = [
   { value: "other", label: "אחר" },
 ] as const;
 
+/** Single-line text: trimmed, no control characters (keeps them out of email headers). */
+const line = () => z.string().trim().transform((v) => v.replace(/[\r\n\t]+/g, " "));
+
 export const contactSchema = z.object({
-  name: z.string().trim().min(2, "נא להזין שם מלא").max(80),
+  name: line().pipe(z.string().min(2, "נא להזין שם מלא").max(80, "השם ארוך מדי")),
   phone: z
     .string()
     .trim()
@@ -17,11 +20,13 @@ export const contactSchema = z.object({
   subject: z.enum(subjectOptions.map((o) => o.value) as [string, ...string[]], {
     message: "נא לבחור נושא",
   }),
-  message: z.string().trim().max(2000, "ההודעה ארוכה מדי").optional().default(""),
-  // anti-spam: honeypot must stay empty, and the form must take a few seconds to fill
-  company: z.string().max(0).optional().default(""),
-  startedAt: z.coerce.number().optional(),
+  message: z.string().trim().max(2000, "ההודעה ארוכה מדי (עד 2,000 תווים)").optional().default(""),
+  // anti-spam, checked in the action: honeypot must stay empty, form must take a few seconds to fill
+  company: z.string().optional().default(""),
+  startedAt: z.coerce.number().int().nonnegative().default(0),
 });
 
 export type ContactInput = z.input<typeof contactSchema>;
-export type ContactFieldErrors = Partial<Record<keyof ContactInput, string>>;
+export type ContactField = "name" | "phone" | "email" | "subject" | "message";
+export type ContactFieldErrors = Partial<Record<ContactField, string>>;
+export type ContactValues = Partial<Record<ContactField, string>>;

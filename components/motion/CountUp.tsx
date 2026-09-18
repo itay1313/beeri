@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
-import { useInView, useReducedMotion } from "motion/react";
+import { useInView } from "motion/react";
+import { useCapabilities } from "./useCapabilities";
 
 /**
  * Counts every number inside a string up from zero when it scrolls into view
@@ -9,7 +10,7 @@ import { useInView, useReducedMotion } from "motion/react";
 export function CountUp({ value, className, duration = 1.4 }: { value: string; className?: string; duration?: number }) {
   const ref = useRef<HTMLSpanElement>(null);
   const inView = useInView(ref, { once: true, amount: 0.8 });
-  const reduce = useReducedMotion();
+  const reduce = useCapabilities().reducedMotion;
   const [t, setT] = useState(0);
 
   useEffect(() => {
@@ -28,7 +29,9 @@ export function CountUp({ value, className, duration = 1.4 }: { value: string; c
   const progress = reduce ? 1 : t;
   const parts = value.split(/(\d+(?:\.\d+)?)/);
   return (
-    <span ref={ref} className={className} aria-label={value}>
+    <span ref={ref} className={className}>
+      <span className="visually-hidden">{value}</span>
+      <span aria-hidden="true">
       {parts.map((part, i) => {
         if (!/^\d/.test(part)) return <span key={i}>{part}</span>;
         const decimals = part.includes(".") ? part.split(".")[1].length : 0;
@@ -39,6 +42,7 @@ export function CountUp({ value, className, duration = 1.4 }: { value: string; c
           </span>
         );
       })}
+      </span>
     </span>
   );
 }

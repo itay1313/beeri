@@ -48,4 +48,3 @@ export const pages = {
   },
 } as const;
 
-export type PageKey = keyof typeof pages;

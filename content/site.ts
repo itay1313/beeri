@@ -30,6 +30,7 @@ export const site = {
       email: "Itamar@beeri-energy.com",
     },
   ],
+  /** Nav order. Paths and labels come from `pages`, so they can't drift apart. */
   nav: [
     { href: "/nahala", label: "חלקה א׳" },
     { href: "/tariff", label: "התעריף המשלים" },
@@ -38,12 +39,7 @@ export const site = {
   ],
   contactId: "contact",
   contactPath: "/contact",
-  /** thin meta strips between sections */
-  meta: {
-    brand: "© BE'ERI 2026",
-    sectors: "נחלות · אגרו · תעשייה",
-    services: "רגולציה · ליווי · תכנון · ניהול והקמה",
-  },
+  contactLabel: "צור קשר",
   cta: {
     primary: "קבעו שיחת ייעוץ ללא התחייבות",
     short: "לשיחת ייעוץ",
@@ -55,4 +51,3 @@ export const site = {
 /** words for the scrolling line under the hero */
 export const marquee = ["נחלות", "אגרו", "תעשייה", "אגירת אנרגיה", "התעריף המשלים", "תמ״א 1 / 24", "חלקה א׳"] as const;
 
-export type Person = (typeof site.people)[number];

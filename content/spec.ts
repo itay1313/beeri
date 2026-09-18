@@ -12,8 +12,6 @@ export const spec = {
   bufferDunam: 2.5,
   yieldNormPct: 75,
   projectLifeYears: 25,
-  /** From the deck: "חלקה א' יכולה לייצר פרויקט סולארי בהיקף של 630 קילוואט AC". Pending client confirmation. */
-  plotPotentialKwAc: 630,
   tariffCloseLabel: "סוף 2026",
   tariffExampleIls: 1.35,
 } as const;

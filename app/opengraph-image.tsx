@@ -2,6 +2,10 @@ import { ImageResponse } from "next/og";
 import { readFile } from "node:fs/promises";
 import path from "node:path";
 import { site } from "@/content/site";
+import { home } from "@/content/home";
+
+/** Hero headline, re-broken for the 1200px card. */
+const ogLines = [home.hero.titleLines[0], `${home.hero.titleLines[1]} ${home.hero.titleLines[2]}`];
 
 export const runtime = "nodejs";
 export const alt = `${site.name} – ${site.tagline}`;
@@ -35,12 +39,13 @@ export default async function OpenGraphImage() {
           </div>
         </div>
         <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-end", fontSize: 96, lineHeight: 1, letterSpacing: -1 }}>
-          <span>{rtl("פתרונות אנרגיה")}</span>
-          <span>{rtl("לנחלות, לאגרו ולתעשייה")}</span>
+          {ogLines.map((l) => (
+            <span key={l}>{rtl(l)}</span>
+          ))}
         </div>
         <div style={{ display: "flex", flexDirection: "row-reverse", justifyContent: "space-between", fontSize: 26, color: "rgba(242,237,227,0.7)", borderTop: "1px solid rgba(242,237,227,0.2)", paddingTop: 24 }}>
-          <span>{rtl("תכנון · ליווי רגולטורי · הקמה מלאה")}</span>
-          <span>beeri-energy.com</span>
+          <span>{rtl(home.positioning.words.join(" · "))}</span>
+          <span>{site.domain.replace("https://www.", "")}</span>
         </div>
       </div>
     ),

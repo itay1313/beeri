@@ -18,7 +18,7 @@ export function NahalaOptions() {
     <section data-tone="light" className="bg-limestone">
       <div className="container-page section-y">
         <Reveal>
-          <SectionHeading index="01" eyebrow="שלוש דרכים" title={l.heading} />
+          <SectionHeading index={l.page.options.index} eyebrow={l.page.options.eyebrow} title={l.heading} />
         </Reveal>
         <div className="mt-12 lg:mt-16 border-b border-line">
           {l.options.map((o, i) => (
@@ -29,7 +29,7 @@ export function NahalaOptions() {
         </div>
 
         <Reveal className="mt-20 lg:mt-28">
-          <SectionHeading index="02" eyebrow="התנאים" title={l.conditionsHeading} as="h2" />
+          <SectionHeading index={l.page.conditions.index} eyebrow={l.page.conditions.eyebrow} title={l.conditionsHeading} />
           <div className="mt-10 lg:mt-14">
             <PlotSpecSheet />
           </div>
@@ -37,7 +37,7 @@ export function NahalaOptions() {
 
         <Reveal className="mt-20 lg:mt-28 grid gap-10 lg:grid-cols-12 lg:items-end border-t border-line pt-12">
           <div className="lg:col-span-8">
-            <Statement text={l.note.split(" – ")[0] + "."} highlight="כאן בארי אנרגיה נכנסת לתמונה ועוזרת לכם להתגבר על החסמים." />
+            <Statement text={l.page.noteText} highlight={l.page.noteHighlight} />
           </div>
           <div className="lg:col-span-4 lg:justify-self-end">
             <Magnetic>

@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { ploni, ploniTzar } from "./fonts";
 import { site } from "@/content/site";
 import { organizationJsonLd, websiteJsonLd } from "@/lib/schema";
+import { MotionProvider } from "@/components/motion/MotionProvider";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -34,7 +35,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="he" dir="rtl" className={`${ploni.variable} ${ploniTzar.variable} h-full`}>
       <body className="min-h-full flex flex-col bg-limestone text-ink">
-                {children}
+        <MotionProvider>{children}</MotionProvider>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify([organizationJsonLd(), websiteJsonLd()]) }}

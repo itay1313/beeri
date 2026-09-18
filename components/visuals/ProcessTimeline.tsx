@@ -39,7 +39,7 @@ export function ProcessTimeline({ steps }: { steps: readonly Step[] }) {
 /** Stylised connection-availability map: day (unlikely) vs night (available). No real geography. */
 function DayNightGlyph({ className }: { className?: string }) {
   return (
-    <div className={cn("flex items-center gap-4 text-label text-ink-soft", className)} aria-label="סטטוס חיבור: יום מוגבל, לילה זמין">
+    <div role="img" className={cn("flex items-center gap-4 text-label text-ink-soft", className)} aria-label="סטטוס חיבור: יום מוגבל, לילה זמין">
       <span className="inline-flex items-center gap-2">
         <span className="relative size-6 rounded-full border border-line overflow-hidden">
           <span className="absolute inset-0 hatch" style={{ ["--hatch-color" as string]: "var(--color-line)", ["--hatch-gap" as string]: "4px" }} />

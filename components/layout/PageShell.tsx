@@ -1,13 +1,13 @@
 import { Header } from "./Header";
 import { Footer } from "./Footer";
-import { MotionProvider } from "@/components/motion/MotionProvider";
 
-export function PageShell({ children }: { children: React.ReactNode }) {
+/** Header + main + footer. `sunrise={false}` for short utility pages (404, accessibility). */
+export function PageShell({ children, sunrise = true }: { children: React.ReactNode; sunrise?: boolean }) {
   return (
-    <MotionProvider>
+    <>
       <Header />
       <main id="main" className="bg-limestone">{children}</main>
-      <Footer />
-    </MotionProvider>
+      <Footer sunrise={sunrise} />
+    </>
   );
 }

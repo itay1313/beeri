@@ -13,23 +13,27 @@ export function FoundersTeaser() {
   return (
     <section id="about" data-tone="light" className="bg-amber-500 text-cell-950 scroll-mt-20 overflow-hidden">
       <div className="container-page section-y">
-        <div className="grid gap-12 lg:grid-cols-12 lg:gap-8 lg:items-center">
-          <Reveal className="order-2 lg:order-none lg:col-span-4">
+        <div className="grid gap-10 md:grid-cols-2 md:gap-8 lg:grid-cols-12 lg:items-center">
+          <Reveal className="order-2 lg:order-none lg:col-span-4 max-w-[26rem] w-full mx-auto">
             <FounderCard person={first} tilt={-2.5} />
           </Reveal>
 
-          <div className="order-1 lg:order-none lg:col-span-4 text-center px-2">
-            <p className="text-label text-cell-950 mb-4">BE&apos;ERI ENERGY SOLUTIONS</p>
+          <div className="order-1 md:col-span-2 lg:order-none lg:col-span-4 text-center px-2">
+            <p className="text-label text-cell-950 mb-4 flex items-center justify-center gap-3">
+              <span className="font-tzar text-[1.05rem] font-bold tracking-normal">{a.index}</span>
+              <span aria-hidden="true" className="block h-px w-8 bg-cell-950/40" />
+              <span>{a.eyebrow}</span>
+            </p>
             <MaskedHeading as="h2" text={a.heading} className="text-h2 text-cell-950" />
             <Reveal>
               <p className="mt-6 text-[1.08rem] leading-relaxed text-cell-950 max-w-[36ch] mx-auto">{founders.story}</p>
               <div className="mt-8">
-                <Button href={pages.about.path} variant="dark" arrow>עוד עלינו</Button>
+                <Button href={pages.about.path} variant="dark" arrow>{a.teaserLink}</Button>
               </div>
             </Reveal>
           </div>
 
-          <Reveal delay={0.1} className="order-3 lg:order-none lg:col-span-4 lg:mt-28">
+          <Reveal delay={0.1} className="order-3 lg:order-none lg:col-span-4 lg:mt-28 max-w-[26rem] w-full mx-auto">
             <FounderCard person={second} tilt={2} alt />
           </Reveal>
         </div>
