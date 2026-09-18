@@ -1,0 +1,209 @@
+@import "tailwindcss";
+
+/* ------------------------------------------------------------------
+   BE'ERI design tokens — "Sun on a surveyed plot"
+   Colors are material: PV-cell black, limestone, amber sun.
+------------------------------------------------------------------- */
+@theme {
+  --color-*: initial;
+  --color-cell-950: #0c1117;
+  --color-cell-900: #141b24;
+  --color-cell-800: #1c2531;
+  --color-cell-700: #2b3642;
+  --color-ink: #1b2733;
+  --color-ink-soft: #55606b;
+  --color-amber-500: #e39a2e;
+  --color-amber-400: #f0b24a;
+  --color-amber-700: #865409;
+  --color-limestone: #f2ede3;
+  --color-dust: #e7dfcf;
+  --color-line: #d3c9b6;
+  --color-line-dark: rgba(242, 237, 227, 0.12);
+  --color-sage: #7e8b72;
+  --color-transparent: transparent;
+  --color-current: currentColor;
+
+  --font-sans: var(--font-ploni), "Ploni", "Arial Hebrew", system-ui, sans-serif;
+  --font-tzar: var(--font-ploni-tzar), "Ploni Tzar", var(--font-ploni), sans-serif;
+
+  --breakpoint-xs: 30rem;
+
+  --container-page: 82.5rem; /* 1320px */
+
+  --ease-out-expo: cubic-bezier(0.2, 0.7, 0.2, 1);
+  --ease-in-out-soft: cubic-bezier(0.65, 0, 0.35, 1);
+
+  --radius-*: initial;
+  --radius-none: 0;
+  --radius-xs: 2px;
+  --radius-sm: 4px;
+  --radius-lg: 1.25rem;
+  --radius-xl: 2rem;
+  --radius-full: 9999px;
+
+  --animate-none: none;
+}
+
+:root {
+  /* fluid type scale */
+  --text-display: clamp(2.75rem, 1.2rem + 6.6vw, 6.5rem);
+  --text-h2: clamp(2.25rem, 1.4rem + 3.4vw, 4.5rem);
+  --text-h3: clamp(1.5rem, 1.25rem + 1vw, 2rem);
+  --text-lede: clamp(1.125rem, 1.05rem + 0.4vw, 1.375rem);
+  --text-body: 1.125rem;
+  --text-small: 0.9375rem;
+  --text-label: 0.8125rem;
+  --text-numeral: clamp(4rem, 2.5rem + 7vw, 10rem);
+
+  /* rhythm */
+  --section-y: clamp(4.5rem, 3rem + 6vw, 9.5rem);
+  --page-x: clamp(1.25rem, 0.5rem + 3.5vw, 4rem);
+  --cut: 2.5rem;
+
+  color-scheme: light;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+  }
+  body {
+    background: var(--color-limestone);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-size: var(--text-body);
+    line-height: 1.6;
+    font-feature-settings: "kern" 1, "liga" 1;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+  }
+  ::selection {
+    background: var(--color-amber-500);
+    color: var(--color-cell-950);
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-amber-500);
+    outline-offset: 3px;
+  }
+  h1, h2, h3, h4 {
+    text-wrap: balance;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+  p { text-wrap: pretty; }
+  img, svg, video, canvas { display: block; max-width: 100%; }
+  button { cursor: pointer; }
+  [dir="rtl"] .ltr, .ltr { direction: ltr; unicode-bidi: isolate; }
+}
+
+@layer utilities {
+  .container-page {
+    width: 100%;
+    max-width: var(--container-page);
+    margin-inline: auto;
+    padding-inline: var(--page-x);
+  }
+  .section-y { padding-block: var(--section-y); }
+  .text-display { font-size: var(--text-display); line-height: 0.95; }
+  .text-h2 { font-size: var(--text-h2); line-height: 1.02; }
+  .text-h3 { font-size: var(--text-h3); line-height: 1.2; }
+  .text-lede { font-size: var(--text-lede); line-height: 1.5; }
+  .text-small { font-size: var(--text-small); }
+  .text-label {
+    font-size: var(--text-label);
+    line-height: 1.3;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+  }
+  .text-numeral {
+    font-family: var(--font-tzar);
+    font-size: var(--text-numeral);
+    line-height: 0.85;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: -0.02em;
+  }
+  .font-tzar { font-family: var(--font-tzar); font-variant-numeric: tabular-nums; }
+  .tabular { font-variant-numeric: tabular-nums; }
+
+  .hairline { border-top: 1px solid var(--color-line); }
+  .hairline-dark { border-top: 1px solid var(--color-line-dark); }
+
+  /* one 45° corner cut, echoing a PV module edge */
+  .cut-tl { clip-path: polygon(var(--cut) 0, 100% 0, 100% 100%, 0 100%, 0 var(--cut)); }
+  .cut-tr { clip-path: polygon(0 0, calc(100% - var(--cut)) 0, 100% var(--cut), 100% 100%, 0 100%); }
+  .cut-bl { clip-path: polygon(0 0, 100% 0, 100% 100%, var(--cut) 100%, 0 calc(100% - var(--cut))); }
+  .cut-br { clip-path: polygon(0 0, 100% 0, 100% calc(100% - var(--cut)), calc(100% - var(--cut)) 100%, 0 100%); }
+
+  /* duotone photo: grayscale + limestone multiply + cell-950 lighten */
+  .duotone { isolation: isolate; }
+  .duotone > img { filter: grayscale(1) contrast(1.08); }
+  .duotone::before, .duotone::after {
+    content: ""; position: absolute; inset: 0; pointer-events: none;
+  }
+  .duotone::before { background: var(--color-limestone); mix-blend-mode: multiply; }
+  .duotone::after { background: var(--color-cell-950); mix-blend-mode: lighten; }
+
+  /* 45° coverage hatch */
+  .hatch {
+    background-image: repeating-linear-gradient(
+      -45deg,
+      var(--hatch-color, var(--color-line)) 0 1px,
+      transparent 1px var(--hatch-gap, 8px)
+    );
+  }
+  .hatch-dark { --hatch-color: var(--color-line-dark); }
+
+  .sun-glow {
+    background: radial-gradient(
+      closest-side,
+      rgba(227, 154, 46, 0.55) 0%,
+      rgba(227, 154, 46, 0.18) 45%,
+      rgba(227, 154, 46, 0) 100%
+    );
+  }
+
+  /* hero field fades under the headline (text sits at the inline start) */
+
+  /* hero entrance: lines rise with a stagger, field and photo fade/unclip. CSS only. */
+  .hero-in {
+    animation: heroIn 720ms var(--ease-out-expo) both;
+    animation-delay: calc(120ms + var(--i, 0) * 80ms);
+  }
+  .hero-fade { animation: heroFade 1100ms ease-out both 200ms; }
+  .hero-photo { animation: heroPhoto 900ms var(--ease-out-expo) both 420ms; }
+  @keyframes heroIn { from { opacity: 0; transform: translateY(22px); } to { opacity: 1; transform: none; } }
+  @keyframes heroFade { from { opacity: 0; } to { opacity: 1; } }
+  @keyframes heroPhoto { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: none; } }
+  @media (prefers-reduced-motion: reduce) {
+    .hero-in, .hero-fade, .hero-photo, .hero-kenburns { animation: none; }
+  }
+
+  /* collage-cut portrait: stepped polygon, echoing stacked PV modules */
+  .collage {
+    clip-path: polygon(10% 9%, 36% 9%, 36% 0%, 70% 0%, 70% 11%, 95% 11%, 100% 45%, 88% 45%, 88% 79%, 66% 79%, 66% 100%, 30% 100%, 30% 89%, 5% 89%, 0% 52%, 10% 52%);
+  }
+  .collage-alt {
+    clip-path: polygon(0% 14%, 28% 14%, 28% 3%, 62% 3%, 62% 0%, 92% 0%, 92% 38%, 100% 38%, 100% 74%, 80% 74%, 80% 96%, 44% 96%, 44% 100%, 12% 100%, 12% 66%, 0% 66%);
+  }
+
+  /* sunrise stage: the disc is sized from the viewport so the scene holds on every screen */
+  .sunrise { --sun: min(62vw, 34svh); }
+  @media (min-width: 48rem) { .sunrise { --sun: min(40vw, 38svh, 24rem); } }
+  @media (min-width: 48rem) and (max-height: 50rem) { .sunrise { --sun: min(40vw, 30svh, 24rem); } }
+
+  /* endless word line */
+  .marquee-track { animation: marquee var(--marquee-duration, 46s) linear infinite; }
+  .marquee:hover .marquee-track { animation-play-state: paused; }
+  @keyframes marquee { to { transform: translateX(-50%); } }
+  @media (prefers-reduced-motion: reduce) { .marquee-track { animation: none; } }
+
+  .visually-hidden {
+    position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+    overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+  }
+}
