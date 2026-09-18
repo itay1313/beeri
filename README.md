@@ -88,16 +88,8 @@ Without keys, development logs submissions to the terminal and shows the success
 
 ## Fonts / license
 
-**The font files are not in git.** Before `pnpm dev` or `pnpm build`, copy the licensed woff2/woff files from the
-AlefAlefAlef kit into:
-
-```
-public/fonts/ploni/ploni-{light,regular,medium,demibold}-aaa.woff2
-public/fonts/ploni-tzar/ploni-tzar-{light,regular,medium,bold}-aaa.woff2
-assets/fonts/ploni-demibold-aaa.woff        # used by the Open Graph image
-```
-
-For Vercel, either make the repository private and commit them, or add them in a build step from private storage.
+**The licensed font files are committed** (`public/fonts/`, `assets/fonts/`), so this repository must stay
+**private**. Making it public would distribute the fonts, which the licence forbids.
 
 
 Ploni and Ploni Tzar are licensed from AlefAlefAlef for **one domain, self-hosted**. Keep them served from

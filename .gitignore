@@ -40,9 +40,7 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-# licensed webfonts (AlefAlefAlef, single-domain licence) — never commit to a public repo
-/public/fonts/
-/assets/fonts/
+# licensed webfonts (AlefAlefAlef, single-domain licence) are committed: this repo MUST stay private
 
 # keep the env template
 !.env.example
