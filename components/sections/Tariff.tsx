@@ -4,8 +4,17 @@ import { SectionHeading } from "@/components/ui/SectionHeading";
 import { TextLink } from "@/components/ui/TextLink";
 import { TariffChart } from "@/components/visuals/TariffChart";
 import { Reveal } from "@/components/motion/Reveal";
+import { MaskedHeading } from "@/components/motion/MaskedHeading";
+import { RoofSplit } from "@/components/visuals/RoofSplit";
 
-/** /tariff: what, how and who, with the day chart pinned beside the text. */
+/** legend swatches, matching the drawing: dark existing panels, hatched new panels, solid battery */
+const swatch = {
+  existing: "bg-cell-950 border border-limestone/55",
+  added: "hatch border border-amber-400 [--hatch-color:var(--color-amber-500)] [--hatch-gap:4px]",
+  battery: "bg-amber-500",
+} as const;
+
+/** /tariff: what, how and who, with the day chart pinned beside the text, then the roof drawing. */
 export function Tariff() {
   const t = home.tariff;
   return (
@@ -54,6 +63,29 @@ export function Tariff() {
               <TariffChart />
             </Reveal>
           </div>
+        </div>
+
+        <div className="mt-20 lg:mt-28 border-t border-line-dark pt-10 grid gap-10 lg:grid-cols-12 lg:items-center">
+          <div className="lg:col-span-5">
+            <p className="text-label text-amber-400 mb-3">{t.roof.eyebrow}</p>
+            <MaskedHeading as="h3" text={t.roof.heading} className="text-h2 text-limestone" />
+            <Reveal>
+              <ol className="mt-10 grid gap-6">
+                {t.roof.items.map((it) => (
+                  <li key={it.key} className="grid grid-cols-[1.25rem_1fr] gap-4">
+                    <span aria-hidden="true" className={`mt-1.5 block size-4 ${swatch[it.key]}`} />
+                    <div>
+                      <p className="font-medium text-limestone">{it.title}</p>
+                      <p className="mt-1 text-limestone/75 max-w-[44ch]">{it.body}</p>
+                    </div>
+                  </li>
+                ))}
+              </ol>
+            </Reveal>
+          </div>
+          <Reveal className="lg:col-span-7">
+            <RoofSplit className="w-full h-auto" />
+          </Reveal>
         </div>
 
         <Reveal className="mt-20 lg:mt-28 border-t border-line-dark pt-10 grid gap-8 lg:grid-cols-12 lg:items-end">
