@@ -14,7 +14,7 @@ export const home = {
     annotations: [
       { label: "אגרו־וולטאי", value: `עד ${spec.agroDunamMax} דונם` },
       { label: "אזור חיץ", value: `${spec.bufferDunam} דונם` },
-      { label: "כיסוי פאנלים", value: `${spec.coverageMinPct}–${spec.coverageMaxPct}%` },
+      { label: "כיסוי פאנלים", value: `עד ${spec.coverageMaxPct}%` },
     ],
     photoCaption: "חלקה א׳ · אגרו־וולטאי · אגירה",
     scrollCue: "תחומי פעילות",
