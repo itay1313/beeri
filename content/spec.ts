@@ -7,8 +7,9 @@ export const spec = {
   updateYear: 2026,
   groundDunamMax: 1,
   agroDunamMax: 10,
-  coverageMinPct: 30,
-  coverageMaxPct: 50,
+  /** net panel coverage: up to 30%, with an option to reach 50% (approved wording, 2026-09-19) */
+  coverageMaxPct: 30,
+  coverageExceptionPct: 50,
   bufferDunam: 2.5,
   yieldNormPct: 75,
   projectLifeYears: 25,
@@ -19,7 +20,7 @@ export const spec = {
 export const specSheet = [
   { value: `עד ${spec.groundDunamMax}`, unit: "דונם", label: "מתקן קרקעי בחלקה א׳, צמוד למגורים או למבנה משק" },
   { value: `עד ${spec.agroDunamMax}`, unit: "דונם", label: "מערכת אגרו־וולטאית בשטח החקלאי של החלקה" },
-  { value: `${spec.coverageMinPct}–${spec.coverageMaxPct}`, unit: "%", label: "כיסוי פאנלים נטו משטח המערכת" },
+  { value: `עד ${spec.coverageMaxPct}`, unit: "%", label: `כיסוי פאנלים נטו (אפשרות עד\u00a0${spec.coverageExceptionPct}%)` },
   { value: `${spec.bufferDunam}`, unit: "דונם", label: "אזור חיץ בין המערכת לאזור המגורים" },
   { value: `≥ ${spec.yieldNormPct}`, unit: "%", label: "המשך גידול מהתפוקה הנורמטיבית (״חקלאות מיטבית״)" },
   { value: `${spec.projectLifeYears}`, unit: "שנה", label: "אורך חיי פרויקט, תפעול ותחזוקה" },
