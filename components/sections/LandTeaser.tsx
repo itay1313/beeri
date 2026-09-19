@@ -49,12 +49,12 @@ export function LandTeaser() {
             ))}
           </ol>
           <div className="mt-8 flex flex-wrap items-end justify-between gap-8">
-            <dl className="grid grid-cols-3 gap-6 lg:gap-10">
+            <dl className="grid grid-cols-3 gap-4 sm:gap-6 lg:gap-10">
               {facts.map((f) => (
                 <div key={f.label} className="flex flex-col-reverse">
                   <dt className="text-label text-ink-soft mt-1 max-w-[14ch]">{f.label}</dt>
-                  <dd className="flex items-baseline gap-1.5">
-                    <CountUp value={f.value} className="font-tzar text-[2.2rem] lg:text-[2.6rem] font-bold leading-none text-ink" />
+                  <dd className="flex flex-wrap items-baseline gap-x-1.5">
+                    <CountUp value={f.value} className="whitespace-nowrap font-tzar text-[1.7rem] sm:text-[2.2rem] lg:text-[2.6rem] font-bold leading-none text-ink" />
                     <span className="text-label text-amber-700">{f.unit}</span>
                   </dd>
                 </div>
