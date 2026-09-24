@@ -38,6 +38,11 @@ export function Footer({ sunrise = true }: { sunrise?: boolean }) {
           <Link href="/accessibility" className="inline-flex min-h-6 items-center hover:text-limestone">{home.footer.accessibility}</Link>
         </div>
         <Wordmark className="border-t border-line-dark pt-6" />
+        <div className="container-page py-2 text-center text-[0.65rem] tracking-wide text-limestone/40">
+          <a href={home.footer.credit.href} target="_blank" rel="noopener" className="ltr inline-flex min-h-6 items-center hover:text-limestone">
+            {home.footer.credit.label}
+          </a>
+        </div>
       </div>
     </footer>
   );
