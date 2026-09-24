@@ -36,6 +36,7 @@ export const site = {
     { href: "/tariff", label: "התעריף המשלים" },
     { href: "/#how-it-works", label: "איך זה עובד" },
     { href: "/about", label: "מי אנחנו" },
+    { href: "/faq", label: "שאלות נפוצות" },
   ],
   contactId: "contact",
   contactPath: "/contact",
