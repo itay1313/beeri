@@ -1,5 +1,6 @@
 import { site } from "@/content/site";
 import { founders } from "@/content/founders";
+import { faq } from "@/content/faq";
 
 export function organizationJsonLd() {
   return {
@@ -30,5 +31,18 @@ export function websiteJsonLd() {
     name: site.name,
     url: site.domain,
     inLanguage: "he",
+  };
+}
+
+export function faqJsonLd() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    inLanguage: "he",
+    mainEntity: faq.items.map((item) => ({
+      "@type": "Question",
+      name: item.q,
+      acceptedAnswer: { "@type": "Answer", text: item.a },
+    })),
   };
 }

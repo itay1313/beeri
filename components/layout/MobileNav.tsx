@@ -52,7 +52,7 @@ export function MobileNav({ light }: { light: boolean }) {
           if (e.target === ref.current) close();
         }}
       >
-        <div className="container-page flex h-[4.5rem] items-center justify-between">
+        <div className="container-page flex h-[4.5rem] shrink-0 items-center justify-between">
           <Logo tone="paper" height={40} />
           <button type="button" onClick={close} aria-label="סגירת תפריט" className="inline-flex size-11 items-center justify-center -me-2">
             <svg aria-hidden="true" viewBox="0 0 24 24" className="size-6" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="square">
