@@ -282,5 +282,6 @@ export const home = {
   footer: {
     legal: "© 2026 BE'ERI Energy Solutions. כל הזכויות שמורות.",
     accessibility: "הצהרת נגישות",
+    credit: { label: "created by com-mando", href: "https://itaycode.com" },
   },
 } as const;
