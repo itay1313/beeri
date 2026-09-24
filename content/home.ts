@@ -31,6 +31,14 @@ export const home = {
       { image: "moshavAerial", caption: "נחלה: גגות מבני המשק וחלקה א׳ עובדים יחד" },
       { image: "barnBess", caption: "מבנה משק עם מערכת סולארית וארון אגירה" },
     ],
+    /** click-to-play company film under the statement */
+    film: {
+      index: "(00)",
+      label: "הסרט",
+      title: "מהגג של המשק ועד הסוללה שליד הקיר",
+      caption: "איך נראה פרויקט של בארי אנרגיה: נחלה, מבנה משק, אגרו־וולטאי ואגירה.",
+      play: "צפו בסרט",
+    },
   },
 
   expertise: {

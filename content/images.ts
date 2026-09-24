@@ -54,13 +54,44 @@ export const images = {
 
 /**
  * Hero video: a few seconds of a farm-scale project (an agricultural roof or a single משק, not a
- * large agro field). Muted, looped, ≤ 4 MB, 1920px wide, mp4 (H.264) and ideally a webm.
- * Pending from Itamar / Michael; until it arrives the poster frame stands in.
+ * large agro field). Muted, looped, ≤ 4 MB, 1920px wide, mp4 (H.264) plus a webm.
+ * PLACEHOLDER: a slow drone-style orbit cut from the client's single-farm render
+ * (14 s, seamless loop). Replace the files with the real footage from Itamar / Michael and
+ * re-export the poster from its first frame so the swap is invisible.
  */
 export const heroVideo = {
-  src: "",
-  webm: "",
-  poster: images.moshavAerial,
+  src: "/videos/hero-farm-placeholder.mp4",
+  webm: "/videos/hero-farm-placeholder.webm",
+  poster: {
+    src: "/images/hero-farm-poster-placeholder.jpg",
+    alt: "",
+    width: 1920,
+    height: 1080,
+    placeholder: true,
+    credit: "first frame of the placeholder hero loop — replace with the real video",
+  } satisfies SiteImage,
+  placeholder: true,
+};
+
+/**
+ * Company film: plays on click (sound allowed), presents the projects and the company. Different
+ * footage from the hero loop. PLACEHOLDER: 23 s silent montage of the client renders ending on the
+ * logo. Replace with the real film; keep the poster a strong frame from it.
+ */
+export const brandFilm = {
+  src: "/videos/beeri-film-placeholder.mp4",
+  webm: "/videos/beeri-film-placeholder.webm",
+  poster: {
+    src: "/images/beeri-film-poster-barn-placeholder.jpg",
+    alt: "",
+    width: 1920,
+    height: 1080,
+    placeholder: true,
+    credit: "frame of the placeholder film — replace",
+  } satisfies SiteImage,
+  /** shown on the poster; update with the real film's length */
+  duration: "0:23",
+  placeholder: true,
 };
 
 /**
