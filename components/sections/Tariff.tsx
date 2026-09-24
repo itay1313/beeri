@@ -4,6 +4,7 @@ import { SectionHeading } from "@/components/ui/SectionHeading";
 import { TextLink } from "@/components/ui/TextLink";
 import { TariffChart } from "@/components/visuals/TariffChart";
 import { Reveal } from "@/components/motion/Reveal";
+import { DeadlineBadge } from "@/components/ui/DeadlineBadge";
 import { MaskedHeading } from "@/components/motion/MaskedHeading";
 import { RoofSplit } from "@/components/visuals/RoofSplit";
 
@@ -24,6 +25,7 @@ export function Tariff() {
         <div className="grid gap-14 lg:grid-cols-12 lg:gap-10">
           <div className="lg:col-span-6">
             <Reveal>
+              <DeadlineBadge className="mb-8">{t.urgency.badge}</DeadlineBadge>
               <SectionHeading index={t.page.index} eyebrow={t.page.eyebrow} title={t.page.heading} tone="dark" />
             </Reveal>
             <Reveal className="mt-14 grid gap-10">
@@ -97,6 +99,7 @@ export function Tariff() {
           <div className="lg:col-span-5">
             <p className="text-label text-amber-400 mb-3">{t.urgency.kicker}</p>
             <p className="text-h3 font-medium">{t.urgency.line}</p>
+            <p className="mt-3 text-limestone/75 max-w-[52ch]">{t.urgency.push}</p>
           </div>
           <div className="lg:col-span-3 lg:text-end">
             <TextLink href={site.contactPath} dark>{t.cta}</TextLink>

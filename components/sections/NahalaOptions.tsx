@@ -8,10 +8,12 @@ import { Button } from "@/components/ui/Button";
 import { Reveal } from "@/components/motion/Reveal";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Magnetic } from "@/components/motion/Magnetic";
+import { NahalaScale } from "./NahalaScale";
 
-const optionImages = [images.barnBess, images.aerialFarmland, images.agrivoltaicRows] as const;
+/** roof, one dunam on the ground, agro up to 10 dunam: all three at farm scale, same 3:2 frame */
+const optionImages = [images.barnBess, images.groundDunam, images.agrivoltaicPlot] as const;
 
-/** /nahala: the three land options as photo rows, then the TAMA spec sheet. */
+/** /nahala: the three land options as photo rows, the same three at one scale, then the TAMA spec sheet. */
 export function NahalaOptions() {
   const l = home.land;
   return (
@@ -27,6 +29,13 @@ export function NahalaOptions() {
             </Reveal>
           ))}
         </div>
+
+        <Reveal className="mt-16 lg:mt-20">
+          <SectionHeading eyebrow={l.page.scale.eyebrow} title={l.page.scale.heading} as="h3" />
+          <div className="mt-8 lg:mt-10">
+            <NahalaScale />
+          </div>
+        </Reveal>
 
         <Reveal className="mt-20 lg:mt-28">
           <SectionHeading index={l.page.conditions.index} eyebrow={l.page.conditions.eyebrow} title={l.conditionsHeading} />

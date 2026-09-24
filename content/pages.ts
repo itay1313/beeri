@@ -42,7 +42,7 @@ export const pages = {
     eyebrow: "חלקה א׳ · היתרים וחקלאות מיטבית",
     titleLines: ["שאלות", "נפוצות"],
     lede: "מה נדרש כדי להקים מתקן אגרו־וולטאי בנחלה, מה נבדק בדרך, ומה קורה אחרי שהוא עומד בשטח.",
-    image: images.heroRows,
+    image: images.agrivoltaicPlot,
     metaTitle: "שאלות נפוצות: היתרים וחקלאות מיטבית בחלקה א׳",
     metaDescription:
       "אילו היתרים נדרשים למתקן אגרו־וולטאי בחלקה א׳, מה בודק משרד החקלאות, מה נחשב חקלאות מיטבית ומי מעבד את הקרקע. תשובות קצרות וישירות.",
@@ -53,7 +53,7 @@ export const pages = {
     eyebrow: "שיחת ייעוץ ללא התחייבות",
     titleLines: ["בואו נדבר", "אנרגיה"],
     lede: home.contact.lede,
-    image: images.agrivoltaicRows,
+    image: images.barnBess,
     metaTitle: "צור קשר",
     metaDescription: "קבעו שיחת ייעוץ ללא התחייבות עם בארי פתרונות אנרגיה. מיכאל 052-612-2550 · איתמר 052-473-4291.",
   },

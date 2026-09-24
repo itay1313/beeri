@@ -1,17 +1,18 @@
 "use client";
 import Image from "next/image";
 import { useEffect, useRef } from "react";
-import { images, heroVideo } from "@/content/images";
+import { heroVideo } from "@/content/images";
 import { useCapabilities } from "@/components/motion/useCapabilities";
 
 /**
- * Full-bleed hero media: the photo always renders (LCP); if a video is configured and the device
- * allows motion, it plays muted on top of it. Slow Ken Burns on the photo when there is no video.
+ * Full-bleed hero media: the poster frame always renders (LCP); once the video file is configured
+ * and the device allows motion, it plays muted and looped on top. Slow Ken Burns on the poster while
+ * there is no video. Poster and video are farm scale: one משק, not an open solar field.
  */
 export function HeroMedia() {
   const caps = useCapabilities();
   const ref = useRef<HTMLVideoElement>(null);
-  const img = images.heroRows;
+  const img = heroVideo.poster;
   const useVideo = Boolean(heroVideo.src) && !caps.reducedMotion && !caps.lowPower;
 
   useEffect(() => {
@@ -28,7 +29,7 @@ export function HeroMedia() {
         fill
         preload
         sizes="100vw"
-        className={`object-cover object-[50%_28%] ${useVideo ? "" : "hero-kenburns"}`}
+        className={`object-cover object-[50%_55%] ${useVideo ? "" : "hero-kenburns"}`}
       />
       {useVideo && (
         <video
@@ -38,8 +39,8 @@ export function HeroMedia() {
           playsInline
           autoPlay
           preload="metadata"
-          poster={heroVideo.poster}
-          className="absolute inset-0 h-full w-full object-cover object-[50%_28%]"
+          poster={img.src}
+          className="absolute inset-0 h-full w-full object-cover"
         >
           {heroVideo.webm && <source src={heroVideo.webm} type="video/webm" />}
           <source src={heroVideo.src} type="video/mp4" />
