@@ -5,8 +5,10 @@ import { ImageCycle } from "@/components/motion/ImageCycle";
 import { ImageReveal } from "@/components/motion/ImageReveal";
 import { MaskedHeading } from "@/components/motion/MaskedHeading";
 import { Reveal } from "@/components/motion/Reveal";
+import { BrandFilm } from "@/components/ui/BrandFilm";
 
-/** Four words stacked at display size beside a tall photograph, then the one paragraph that says why BE'ERI exists. */
+/** Four words stacked at display size beside a tall photograph, the one paragraph that says why BE'ERI exists,
+ * then the company film right under its punchline ("כאן בארי אנרגיה נכנסת לתמונה"). */
 export function Positioning() {
   const p = home.positioning;
   return (
@@ -31,6 +33,22 @@ export function Positioning() {
               <ImageCycle slides={p.slides.map((sl) => ({ image: images[sl.image], caption: sl.caption }))} />
             </ImageReveal>
           </div>
+        </div>
+
+        <div className="mt-20 lg:mt-28">
+          <Reveal className="mb-6 lg:mb-8 grid gap-3 lg:grid-cols-12 lg:items-end">
+            <p className="lg:col-span-5 flex items-baseline gap-4">
+              <span className="font-tzar text-[1rem] font-bold text-amber-700 ltr">{p.film.index}</span>
+              <span className="text-label text-ink-soft">{p.film.label}</span>
+            </p>
+            <div className="lg:col-span-7">
+              <h2 className="text-h3 font-medium text-ink">{p.film.title}</h2>
+              <p className="mt-2 text-small text-ink-soft max-w-[52ch]">{p.film.caption}</p>
+            </div>
+          </Reveal>
+          <ImageReveal>
+            <BrandFilm title={p.film.title} playLabel={p.film.play} />
+          </ImageReveal>
         </div>
       </div>
     </section>
