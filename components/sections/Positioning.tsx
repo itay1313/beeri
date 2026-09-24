@@ -36,18 +36,8 @@ export function Positioning() {
         </div>
 
         <div className="mt-20 lg:mt-28">
-          <Reveal className="mb-6 lg:mb-8 grid gap-3 lg:grid-cols-12 lg:items-end">
-            <p className="lg:col-span-5 flex items-baseline gap-4">
-              <span className="font-tzar text-[1rem] font-bold text-amber-700 ltr">{p.film.index}</span>
-              <span className="text-label text-ink-soft">{p.film.label}</span>
-            </p>
-            <div className="lg:col-span-7">
-              <h2 className="text-h3 font-medium text-ink">{p.film.title}</h2>
-              <p className="mt-2 text-small text-ink-soft max-w-[52ch]">{p.film.caption}</p>
-            </div>
-          </Reveal>
           <ImageReveal>
-            <BrandFilm title={p.film.title} playLabel={p.film.play} />
+            <BrandFilm title={p.film.title} caption={p.film.caption} playLabel={p.film.play} />
           </ImageReveal>
         </div>
       </div>
