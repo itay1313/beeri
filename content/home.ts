@@ -31,12 +31,10 @@ export const home = {
       { image: "moshavAerial", caption: "נחלה: גגות מבני המשק וחלקה א׳ עובדים יחד" },
       { image: "barnBess", caption: "מבנה משק עם מערכת סולארית וארון אגירה" },
     ],
-    /** click-to-play company film under the statement */
+    /** click-to-play company film under the statement; the title sits on the poster (*…* = Light) */
     film: {
-      index: "(00)",
-      label: "הסרט",
-      title: "מהגג של המשק ועד הסוללה שליד הקיר",
-      caption: "איך נראה פרויקט של בארי אנרגיה: נחלה, מבנה משק, אגרו־וולטאי ואגירה.",
+      title: "פרויקט אחד, *מהגג ועד הסוללה*",
+      caption: "נחלה, מבנה משק, אגרו־וולטאי ואגירה: ככה נראה פרויקט של בארי אנרגיה.",
       play: "צפו בסרט",
     },
   },
