@@ -27,10 +27,9 @@ export const home = {
     punch: "כאן בארי אנרגיה נכנסת לתמונה.",
     /** rotating photo beside the four words: image key + caption */
     slides: [
-      { image: "agrivoltaicRows", caption: "אגרו־וולטאי: גידול חקלאי בין שורות הפאנלים" },
+      { image: "agrivoltaicPlot", caption: "אגרו־וולטאי: גידול חקלאי בין שורות הפאנלים" },
       { image: "moshavAerial", caption: "נחלה: גגות מבני המשק וחלקה א׳ עובדים יחד" },
       { image: "barnBess", caption: "מבנה משק עם מערכת סולארית וארון אגירה" },
-      { image: "heroRows", caption: "שורות פאנלים בשדה, עם הזריחה" },
     ],
   },
 
@@ -92,8 +91,11 @@ export const home = {
       ],
     },
     urgency: {
+      /** no countdown until Michael / Itamar confirm the exact closing date */
+      badge: `הזדמנות מוגבלת בזמן · עד ${spec.tariffCloseLabel}`,
       kicker: "הזדמנות אחרונה לנצל את הגג הריק",
-      line: `האסדרה עתידה להיסגר ב${spec.tariffCloseLabel}`,
+      line: `האסדרה עתידה להיסגר ב${spec.tariffCloseLabel}.`,
+      push: "בדיקת ההיתכנות, אישור החיבור וההקמה לוקחים זמן. כדי להספיק, כדאי להתחיל את הבדיקה כבר עכשיו.",
       marker: "2026",
     },
     /** 24-hour chart labels (qualitative: no values on the axis) */
@@ -162,6 +164,16 @@ export const home = {
     page: {
       options: { index: "01", eyebrow: "שלוש דרכים" },
       conditions: { index: "02", eyebrow: "התנאים" },
+      /** the three options side by side at one scale: drawn cross-section until the clip arrives */
+      scale: {
+        eyebrow: "בקנה מידה אמיתי",
+        heading: "שלוש האפשרויות, *זו לצד זו*",
+        caption:
+          "חתך של נחלה אחת, באותו קנה מידה לרוחב ולגובה: גג מבנה המשק, מתקן קרקעי של כדונם לצדו, ומעבר לאזור החיץ שדה אגרו־וולטאי של עד 10 דונם, שהגידול החקלאי ממשיך מתחת לפאנלים שלו.",
+        labels: { home: "מגורים", buffer: "חיץ", scale: "10 מ׳" },
+        /** approximate widths at one dunam = 32 × 32 m and ten dunam = 100 × 100 m */
+        sizes: { roof: "כ־20 מ׳", ground: "כ־32 מ׳ · דונם", agro: `כ־100 מ׳ · ${spec.agroDunamMax} דונם` },
+      },
       noteText: "פרויקט אגרו בחלקה א׳ טומן הזדמנות אדירה לניצול הקרקע ותשואה נוספת. בשונה ממערכות גג מסורתיות, מורכבות הפרויקט עולה משמעותית.",
       noteHighlight: "כאן בארי אנרגיה נכנסת לתמונה ועוזרת לכם להתגבר על החסמים.",
     },

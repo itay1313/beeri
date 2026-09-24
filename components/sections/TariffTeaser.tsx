@@ -1,9 +1,11 @@
 import { home } from "@/content/home";
 import { pages } from "@/content/pages";
+import { site } from "@/content/site";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { TariffChart } from "@/components/visuals/TariffChart";
 import { TextLink } from "@/components/ui/TextLink";
 import { Reveal } from "@/components/motion/Reveal";
+import { DeadlineBadge } from "@/components/ui/DeadlineBadge";
 
 /** Home teaser for the tariff page: the schematic, the promise, the deadline. */
 export function TariffTeaser() {
@@ -15,6 +17,7 @@ export function TariffTeaser() {
         <div className="grid gap-14 lg:grid-cols-12 lg:gap-10 lg:items-center">
           <div className="lg:col-span-6">
             <Reveal>
+              <DeadlineBadge className="mb-8">{t.urgency.badge}</DeadlineBadge>
               <SectionHeading index={t.index} eyebrow={t.eyebrow} title={t.heading} lede={t.sub} tone="dark" />
             </Reveal>
             <Reveal className="mt-10 grid gap-6">
@@ -41,6 +44,10 @@ export function TariffTeaser() {
           <div className="lg:col-span-6">
             <p className="text-label text-amber-400 mb-2">{t.urgency.kicker}</p>
             <p className="text-h3 font-medium">{t.urgency.line}</p>
+            <p className="mt-3 text-limestone/75 max-w-[52ch]">{t.urgency.push}</p>
+          </div>
+          <div className="lg:col-span-3 lg:text-end">
+            <TextLink href={site.contactPath} dark>{t.cta}</TextLink>
           </div>
         </Reveal>
       </div>
