@@ -11,6 +11,7 @@ import { cn } from "@/lib/cn";
 export function BrandFilm({ title, playLabel, className }: { title: string; playLabel: string; className?: string }) {
   const [playing, setPlaying] = useState(false);
   const ref = useRef<HTMLVideoElement>(null);
+  const btn = useRef<HTMLButtonElement>(null);
 
   function start() {
     setPlaying(true);
@@ -34,14 +35,18 @@ export function BrandFilm({ title, playLabel, className }: { title: string; play
           preload="auto"
           poster={brandFilm.poster.src}
           aria-label={title}
-          onEnded={() => setPlaying(false)}
+          onEnded={() => {
+            setPlaying(false);
+            // the video unmounts; hand focus back to the play button so keyboard users keep their place
+            requestAnimationFrame(() => btn.current?.focus());
+          }}
           className="absolute inset-0 h-full w-full object-contain bg-cell-950"
         >
           {brandFilm.webm && <source src={brandFilm.webm} type="video/webm" />}
           <source src={brandFilm.src} type="video/mp4" />
         </video>
       ) : (
-        <button type="button" onClick={start} className="group absolute inset-0 block text-start cursor-pointer">
+        <button ref={btn} type="button" onClick={start} className="group absolute inset-0 block text-start cursor-pointer">
           <Image
             src={brandFilm.poster.src}
             alt=""
