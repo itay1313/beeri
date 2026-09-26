@@ -17,11 +17,12 @@ export function PlotSpecSheet() {
           </div>
         ))}
       </dl>
+      {/* the plot is a long, narrow strip: residence at the road end, buffer, then the field */}
       <div aria-hidden="true" className="relative hidden md:block aspect-[3/4]">
         <PlotDrawing dark={false} id="spec-plot" />
-        <span className="absolute top-[1%] left-[8%] text-label text-amber-700">אגרו־וולטאי</span>
-        <span className="absolute bottom-[2%] left-[42%] text-label text-amber-700">חיץ</span>
-        <span className="absolute top-[55%] left-[57%] text-label text-ink-soft">מגורים</span>
+        <span className="absolute top-[3%] left-[6%] text-label text-amber-700">אגרו־וולטאי</span>
+        <span className="absolute top-[63.5%] left-[6%] text-label text-amber-700">חיץ</span>
+        <span className="absolute top-[82%] left-[6%] text-label text-ink-soft">מגורים</span>
       </div>
     </div>
   );

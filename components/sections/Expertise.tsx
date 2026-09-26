@@ -5,11 +5,9 @@ import { SectionHeading } from "@/components/ui/SectionHeading";
 import { ImagePanel } from "@/components/ui/ImagePanel";
 import { ImageReveal } from "@/components/motion/ImageReveal";
 import { ArrowIcon } from "@/components/ui/Button";
-import { WarehouseRoof } from "@/components/visuals/WarehouseRoof";
 import { Reveal } from "@/components/motion/Reveal";
 import { cn } from "@/lib/cn";
 
-/** tile 3 (commercial & industrial) waits for a warehouse-roof photo and shows a drawing until then */
 const tileImages = [images.moshavAerial, images.barnBess, industrialRoof] as const;
 const cuts = ["tl", "tr", "tl"] as const;
 
@@ -31,22 +29,13 @@ export function Expertise() {
             <li key={item.n} className={cn(i === 1 && "md:mt-16 lg:mt-24")}>
               <Link href={item.href} className="group block">
                 <ImageReveal delay={i * 0.08}>
-                  {tileImages[i] ? (
-                    <ImagePanel
-                      image={tileImages[i]}
-                      cut={cuts[i]}
-                      sizes="(min-width:768px) 33vw, 100vw"
-                      className="aspect-[3/4]"
-                      imgClassName="transition-transform duration-[1400ms] ease-out-expo group-hover:scale-[1.04]"
-                    />
-                  ) : (
-                    <div className={`cut-${cuts[i]} relative aspect-[3/4] overflow-hidden bg-cell-950`}>
-                      <WarehouseRoof
-                        label="מחסן לוגיסטי עם מערכת סולארית על הגג"
-                        className="absolute inset-0 size-full transition-transform duration-[1400ms] ease-out-expo group-hover:scale-[1.04]"
-                      />
-                    </div>
-                  )}
+                  <ImagePanel
+                    image={tileImages[i]}
+                    cut={cuts[i]}
+                    sizes="(min-width:768px) 33vw, 100vw"
+                    className="aspect-[3/4]"
+                    imgClassName="transition-transform duration-[1400ms] ease-out-expo group-hover:scale-[1.04]"
+                  />
                 </ImageReveal>
                 <div className="mt-5 flex items-baseline justify-between gap-4 border-t border-line pt-4">
                   <h3 className="text-h3 font-medium text-ink group-hover:text-amber-700 transition-colors">{item.title}</h3>

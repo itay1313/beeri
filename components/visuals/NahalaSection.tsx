@@ -8,7 +8,7 @@ import { useCapabilities } from "@/components/motion/useCapabilities";
  * Side-on cross-section of one nahala: residence, the farm building with panels on its roof, a
  * ground array of about one dunam beside it, the buffer, and an agrivoltaic field of up to 10 dunam.
  * One scale for width and height, so the three options read at their real size next to each other.
- * Stands in for the technical clip until `nahalaVideo` is supplied.
+ * Shown under the carousel of the client's aerial frames.
  */
 
 const PPM = 5.2; // px per metre, both axes
