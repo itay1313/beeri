@@ -20,7 +20,8 @@ function split(ms: number) {
 /**
  * Live clock to the closing of the complementary tariff (end of 2026). Renders dashes on the
  * server and fills in on mount, so the markup never disagrees with the client's clock. Ticks
- * every second; under reduced motion the seconds are dropped and it ticks once a minute.
+ * every second; under reduced motion the seconds are dropped and it ticks once a minute. Each
+ * tick is scheduled for the moment the smallest shown unit actually changes.
  */
 export function Countdown({ className }: { className?: string }) {
   const t = home.tariff.urgency.countdown;
@@ -28,11 +29,16 @@ export function Countdown({ className }: { className?: string }) {
   const [left, setLeft] = useState<number | null>(null);
 
   useEffect(() => {
-    const tick = () => setLeft(TARGET - Date.now());
+    const step = reducedMotion ? 60_000 : 1000;
+    let timer = 0;
+    const tick = () => {
+      const remaining = TARGET - Date.now();
+      setLeft(remaining);
+      if (remaining <= 0) return;
+      timer = window.setTimeout(tick, (remaining % step || step) + 1);
+    };
     tick();
-    const every = reducedMotion ? 60_000 : 1000;
-    const timer = setInterval(tick, every);
-    return () => clearInterval(timer);
+    return () => clearTimeout(timer);
   }, [reducedMotion]);
 
   const parts = left === null ? null : split(left);

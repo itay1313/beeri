@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import { useCallback, useEffect, useId, useRef, useState } from "react";
+import { useCallback, useId, useRef, useState } from "react";
 import { home } from "@/content/home";
 import { nahalaCarousel } from "@/content/images";
 import { cn } from "@/lib/cn";
@@ -20,18 +20,9 @@ export function NahalaCarousel() {
   const [i, setI] = useState(0);
   const { reducedMotion } = useCapabilities();
   const id = useId();
-  const frame = useRef<HTMLDivElement>(null);
   const pointer = useRef<{ x: number; y: number } | null>(null);
 
   const go = useCallback((to: number) => setI(((to % n) + n) % n), [n]);
-
-  // preload the neighbours so the crossfade never waits on the network
-  useEffect(() => {
-    [i + 1, i - 1].forEach((k) => {
-      const img = new window.Image();
-      img.src = nahalaCarousel[((k % n) + n) % n].src;
-    });
-  }, [i, n]);
 
   const onKey = (e: React.KeyboardEvent) => {
     // RTL: the "next" slide is to the left
@@ -42,6 +33,8 @@ export function NahalaCarousel() {
   };
   const onPointerDown = (e: React.PointerEvent) => {
     if (e.pointerType === "mouse") return;
+    // keep receiving the pointer even when the finger lifts outside the frame
+    e.currentTarget.setPointerCapture(e.pointerId);
     pointer.current = { x: e.clientX, y: e.clientY };
   };
   const onPointerUp = (e: React.PointerEvent) => {
@@ -68,7 +61,6 @@ export function NahalaCarousel() {
     >
       {/* the frame */}
       <div
-        ref={frame}
         className="relative aspect-video overflow-hidden bg-cell-950 cut-tl select-none touch-pan-y"
         onPointerDown={onPointerDown}
         onPointerUp={onPointerUp}
@@ -93,7 +85,6 @@ export function NahalaCarousel() {
                 fill
                 sizes="(min-width:1400px) 1320px, 100vw"
                 priority={k === 0}
-                loading={k === 0 ? "eager" : "lazy"}
                 className="object-cover"
                 draggable={false}
               />
