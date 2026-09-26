@@ -97,12 +97,17 @@ export const home = {
       ],
     },
     urgency: {
-      /** no countdown until Michael / Itamar confirm the exact closing date */
       badge: `הזדמנות מוגבלת בזמן · עד ${spec.tariffCloseLabel}`,
       kicker: "הזדמנות אחרונה לנצל את הגג הריק",
       line: `האסדרה עתידה להיסגר ב${spec.tariffCloseLabel}.`,
       push: "בדיקת ההיתכנות, אישור החיבור וההקמה לוקחים זמן. כדי להספיק, כדאי להתחיל את הבדיקה כבר עכשיו.",
-      marker: "2026",
+      /** live clock to the closing date (approved by the client, 2026-09-26) */
+      countdown: {
+        label: "הזמן שנותר עד סגירת האסדרה",
+        until: `עד ${spec.tariffCloseDate}`,
+        units: { days: "ימים", hours: "שעות", minutes: "דקות", seconds: "שניות" },
+        closed: "האסדרה נסגרה",
+      },
     },
     /** 24-hour chart labels (qualitative: no values on the axis) */
     chart: {
@@ -170,7 +175,63 @@ export const home = {
     page: {
       options: { index: "01", eyebrow: "שלוש דרכים" },
       conditions: { index: "02", eyebrow: "התנאים" },
-      /** the three options side by side at one scale: drawn cross-section until the clip arrives */
+      /**
+       * Carousel of the client's aerial frames (Drive, 2026-09-25): one nahala, the four projects
+       * from the simplest to the most complex. The copy is the client's, set live over the
+       * text-free frames in the same layout as their captioned versions.
+       */
+      carousel: {
+        eyebrow: "מהקל למורכב",
+        heading: "ארבעה פרויקטים, *נחלה אחת*",
+        label: "ארבעה פרויקטים סולאריים בנחלה אחת",
+        challengesLabel: "האתגרים",
+        prev: "לשקופית הקודמת",
+        next: "לשקופית הבאה",
+        slides: [
+          {
+            key: "nahala",
+            tab: "הנחלה",
+            title: "מה אפשר להקים בנחלה?",
+            body: "ארבעה פרויקטים סולאריים שיכולים לשבת זה לצד זה באותה נחלה, כל אחד עם הכללים והאתגרים שלו.",
+            challenges: [],
+          },
+          {
+            key: "roofs",
+            tab: "גגות",
+            title: "מערכת סולארית על הגגות",
+            body: "מערכת סולארית על גגות המבנים הקיימים בנחלה: בית, מחסן ומבני משק. מנצלת שטח שכבר בנוי.",
+            challenges: ["בדיקת קונסטרוקציה של הגג", "תשובת מחלק מחברת החשמל"],
+          },
+          {
+            key: "ground",
+            tab: "דונם קרקעי",
+            title: "דונם קרקעי צמוד למגורים",
+            body: "עד דונם אחד של פאנלים על הקרקע, צמוד לאזור המגורים. אפשר להקים מערכת גבוהה וליהנות מדו־שימוש: שטח מוצל לחניה, לאחסון ולצרכים נוספים.",
+            challenges: ["היתר בנייה", "תשובת מחלק מחברת החשמל"],
+          },
+          {
+            key: "agro",
+            tab: "אגרו־וולטאי",
+            title: "מערכת סולארית מעל הגידול",
+            body: `עד ${spec.agroDunamMax} דונם בחלקה א׳, בשורות מוגבהות שמכסות עד ${spec.coverageMaxPct}% מהשטח. החקלאות ממשיכה מתחת לפאנלים.`,
+            challenges: [
+              "היתר בנייה",
+              "אישור משרד החקלאות",
+              `המשך גידול, ויבול של ${spec.yieldNormPct}% לפחות מהמקובל באזור`,
+              `מרחק של ${spec.bufferDunam} דונם לפחות מאזור המגורים`,
+              "השקעה גבוהה והון עצמי משמעותי",
+            ],
+          },
+          {
+            key: "storage",
+            tab: "אגירה",
+            title: "מתקן סוללות אגירת חשמל",
+            body: "הסוללות אוגרות את החשמל בשעות השמש ומאפשרות להזרים אותו לרשת בלילה. זה המפתח לקבלת חיבור מחברת החשמל.",
+            challenges: ["היתר בנייה", "התאמות בתשתיות החשמל ובמערכות כיבוי האש", "היתר כבאות"],
+          },
+        ],
+      },
+      /** the three options at one scale: the drawn cross-section */
       scale: {
         eyebrow: "בקנה מידה אמיתי",
         heading: "שלוש האפשרויות, *זו לצד זו*",

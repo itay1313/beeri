@@ -111,8 +111,6 @@
     font-weight: 500;
     letter-spacing: 0.06em;
   }
-  /* hollow display numeral (2026 marker) */
-  .outline-numeral { color: transparent; -webkit-text-stroke: 1px color-mix(in srgb, var(--color-limestone) 45%, transparent); }
   .font-tzar { font-family: var(--font-tzar); font-variant-numeric: tabular-nums; }
   .tabular { font-variant-numeric: tabular-nums; }
 

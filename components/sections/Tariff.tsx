@@ -5,6 +5,7 @@ import { TextLink } from "@/components/ui/TextLink";
 import { TariffChart } from "@/components/visuals/TariffChart";
 import { Reveal } from "@/components/motion/Reveal";
 import { DeadlineBadge } from "@/components/ui/DeadlineBadge";
+import { Countdown } from "@/components/ui/Countdown";
 import { MaskedHeading } from "@/components/motion/MaskedHeading";
 import { RoofSplit } from "@/components/visuals/RoofSplit";
 
@@ -91,17 +92,15 @@ export function Tariff() {
         </div>
 
         <Reveal className="mt-20 lg:mt-28 border-t border-line-dark pt-10 grid gap-8 lg:grid-cols-12 lg:items-end">
-          <div className="lg:col-span-4">
-            <span aria-hidden="true" className="outline-numeral font-tzar font-light text-[clamp(5rem,12vw,11rem)] leading-[0.85]">
-              {t.urgency.marker}
-            </span>
+          <div className="lg:col-span-5">
+            <Countdown />
           </div>
           <div className="lg:col-span-5">
             <p className="text-label text-amber-400 mb-3">{t.urgency.kicker}</p>
             <p className="text-h3 font-medium">{t.urgency.line}</p>
             <p className="mt-3 text-limestone/75 max-w-[52ch]">{t.urgency.push}</p>
           </div>
-          <div className="lg:col-span-3 lg:text-end">
+          <div className="lg:col-span-2 lg:text-end">
             <TextLink href={site.contactPath} dark>{t.cta}</TextLink>
           </div>
         </Reveal>

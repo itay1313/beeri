@@ -14,6 +14,9 @@ export const spec = {
   yieldNormPct: 75,
   projectLifeYears: 25,
   tariffCloseLabel: "סוף 2026",
+  /** end of the civil year 2026 (client, 2026-09-26); Israel winter time. Drives the countdown. */
+  tariffCloseAt: "2026-12-31T23:59:59+02:00",
+  tariffCloseDate: "31.12.2026",
   tariffExampleIls: 1.35,
 } as const;
 

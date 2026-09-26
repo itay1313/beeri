@@ -6,6 +6,7 @@ import { TariffChart } from "@/components/visuals/TariffChart";
 import { TextLink } from "@/components/ui/TextLink";
 import { Reveal } from "@/components/motion/Reveal";
 import { DeadlineBadge } from "@/components/ui/DeadlineBadge";
+import { Countdown } from "@/components/ui/Countdown";
 
 /** Home teaser for the tariff page: the schematic, the promise, the deadline. */
 export function TariffTeaser() {
@@ -36,17 +37,15 @@ export function TariffTeaser() {
         </div>
 
         <Reveal className="mt-16 lg:mt-24 border-t border-line-dark pt-8 grid gap-6 lg:grid-cols-12 lg:items-end">
-          <div className="lg:col-span-3">
-            <span aria-hidden="true" className="outline-numeral font-tzar font-light text-[clamp(4rem,9vw,8rem)] leading-[0.85]">
-              {t.urgency.marker}
-            </span>
+          <div className="lg:col-span-5">
+            <Countdown />
           </div>
-          <div className="lg:col-span-6">
+          <div className="lg:col-span-5">
             <p className="text-label text-amber-400 mb-2">{t.urgency.kicker}</p>
             <p className="text-h3 font-medium">{t.urgency.line}</p>
             <p className="mt-3 text-limestone/75 max-w-[52ch]">{t.urgency.push}</p>
           </div>
-          <div className="lg:col-span-3 lg:text-end">
+          <div className="lg:col-span-2 lg:text-end">
             <TextLink href={site.contactPath} dark>{t.cta}</TextLink>
           </div>
         </Reveal>

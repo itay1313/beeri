@@ -95,17 +95,32 @@ export const brandFilm = {
 };
 
 /**
- * /nahala: short technical clip of the three options side by side at real scale (roof, one dunam
- * on the ground, agrivoltaic up to 10 dunam). Pending; until it arrives the page shows the drawn
- * cross-section (components/visuals/NahalaSection.tsx).
+ * /nahala carousel: the client's five aerial frames of one nahala (Drive, 2026-09-25), the
+ * text-free versions. The badge, the option chips and the location mini-map are part of the
+ * frame; the title, body and challenges are live text (NahalaCarousel.tsx). 16:9, 1920px.
  */
-export const nahalaVideo = {
-  src: "",
-  webm: "",
-};
+const frame = (file: string, alt: string): SiteImage => ({
+  src: `/images/nahala/${file}`,
+  alt,
+  width: 1920,
+  height: 1080,
+  placeholder: false,
+  credit: "client (Drive, 2026-09-25)",
+});
+export const nahalaCarousel = [
+  frame("00-nahala.jpg", "מבט אווירי על נחלה: אזור המגורים בקצה, ומעבר לו חלקה א׳ החקלאית, ארוכה וצרה"),
+  frame("01-roofs.jpg", "פאנלים סולאריים על גגות שני מבני משק, מבט אווירי"),
+  frame("02-ground.jpg", "מתקן קרקעי של כדונם בקצה החלקה החקלאית, צמוד לאזור המגורים"),
+  frame("03-agro.jpg", "שורות פאנלים מוגבהות לאורך החלקה החקלאית, עם גידול מתחתיהן"),
+  frame("04-storage.jpg", "ארון סוללות בין מבני המשק, לצד המתקן הקרקעי"),
+] as const satisfies readonly SiteImage[];
 
-/**
- * Commercial & industrial tile: needs a photo of a factory or logistics warehouse with a rooftop
- * system. Pending from the client; until it arrives the tile shows a drawing (WarehouseRoof.tsx).
- */
-export const industrialRoof: SiteImage | null = null;
+/** Commercial & industrial tile: an industrial park with rooftop systems (client, Drive 2026-09-25). */
+export const industrialRoof: SiteImage = {
+  src: "/images/industrial-park-roofs.jpg",
+  alt: "מבט אווירי על אזור תעשייה: מערכות סולאריות על גגות המפעלים והמחסנים",
+  width: 1600,
+  height: 1200,
+  placeholder: false,
+  credit: "client (Drive, 2026-09-25)",
+};
