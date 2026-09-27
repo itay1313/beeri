@@ -53,24 +53,23 @@ export const images = {
 } as const satisfies Record<string, SiteImage>;
 
 /**
- * Hero video: a few seconds of a farm-scale project (an agricultural roof or a single משק, not a
- * large agro field). Muted, looped, ≤ 4 MB, 1920px wide, mp4 (H.264) plus a webm.
- * PLACEHOLDER: a slow drone-style orbit cut from the client's single-farm render
- * (14 s, seamless loop). Replace the files with the real footage from Itamar / Michael and
- * re-export the poster from its first frame so the swap is invisible.
+ * Hero video: a mix of the client's five clips (beeri/video, 2026-09-27), about 4 s from each with
+ * 0.6 s crossfades: ground rows in a field, agro rows over grass, a long utility field, an
+ * industrial roof, rooftop panels close up. 17.6 s loop, muted, 1920 × 1080 H.264, ~7 MB.
+ * No webm: VP9 came out larger than the mp4. Poster = the mix's first frame.
  */
 export const heroVideo = {
-  src: "/videos/hero-farm-placeholder.mp4",
-  webm: "/videos/hero-farm-placeholder.webm",
+  src: "/videos/hero-mix.mp4",
+  webm: "",
   poster: {
-    src: "/images/hero-farm-poster-placeholder.jpg",
+    src: "/images/hero-mix-poster.jpg",
     alt: "",
     width: 1920,
     height: 1080,
-    placeholder: true,
-    credit: "first frame of the placeholder hero loop — replace with the real video",
+    placeholder: false,
+    credit: "first frame of the hero mix (client footage)",
   } satisfies SiteImage,
-  placeholder: true,
+  placeholder: false,
 };
 
 /**
