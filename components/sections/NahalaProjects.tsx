@@ -8,7 +8,7 @@ import { cn } from "@/lib/cn";
 /**
  * /nahala: the four projects of the header carousel, laid out one under the other as static
  * image + text. On wide screens a tall "מיקום בנחלה" rail stays pinned beside them and switches
- * to the project in view. The rail is the mini-map from the client's frames, turned upright;
+ * to the project in view. Each image is labelled as a render (הדמיה). The rail is the mini-map from the client's frames, turned upright;
  * the frames themselves are cropped above their own mini-map there. Narrow screens show the
  * whole frame (mini-map included) and no rail.
  */
@@ -51,6 +51,11 @@ export function NahalaProjects() {
                 sizes="(min-width:1024px) 70vw, 100vw"
                 className="object-cover object-top"
               />
+              {/* these are renders, not built projects: say so on the image */}
+              <p className="absolute bottom-3 end-3 sm:bottom-4 sm:end-4 inline-flex items-center gap-2 rounded-full bg-cell-950/75 px-3 py-1.5 text-label text-limestone backdrop-blur-sm">
+                <span aria-hidden="true" className="block size-1.5 rotate-45 bg-amber-400" />
+                {p.simulation}
+              </p>
             </div>
             <div className="mt-6 lg:mt-8 grid gap-6 lg:grid-cols-10 lg:gap-10">
               <div className="lg:col-span-6">
