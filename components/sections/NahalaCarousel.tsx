@@ -1,19 +1,24 @@
 "use client";
 import Image from "next/image";
-import { useCallback, useId, useRef, useState } from "react";
+import { useCallback, useEffect, useId, useRef, useState } from "react";
 import { home } from "@/content/home";
 import { nahalaCarousel } from "@/content/images";
 import { cn } from "@/lib/cn";
 import { useCapabilities } from "@/components/motion/useCapabilities";
+import { PauseButton } from "@/components/ui/PauseButton";
+
+/** autoplay step */
+const STEP_MS = 3000;
 
 /**
  * One nahala, four projects: the client's aerial frames with their copy set live over them.
  * The badge, the option chips and the location mini-map are baked into each frame, so on wide
  * screens the text sits in the frame's dark band at the positions of the client's captioned
  * versions (container-query units keep it in step with the image). Below `lg` the text moves
- * under the frame. Manual: arrows, index tabs, keyboard and swipe. Crossfade, none under reduced motion.
+ * under the frame. Arrows, index tabs, keyboard and swipe; with `autoplay` it also advances every 3 s,
+ * with a pause toggle (starts paused under reduced motion). Crossfade, none under reduced motion.
  */
-export function NahalaCarousel() {
+export function NahalaCarousel({ autoplay = false }: { autoplay?: boolean }) {
   const c = home.land.page.carousel;
   const slides = c.slides;
   const n = slides.length;
@@ -23,6 +28,15 @@ export function NahalaCarousel() {
   const pointer = useRef<{ x: number; y: number } | null>(null);
 
   const go = useCallback((to: number) => setI(((to % n) + n) % n), [n]);
+
+  // autoplay: one timer per slide, so a manual step restarts the 3 s count
+  const [paused, setPaused] = useState(false);
+  const running = autoplay && !paused && !reducedMotion;
+  useEffect(() => {
+    if (!running) return;
+    const t = window.setTimeout(() => setI((k) => (k + 1) % n), STEP_MS);
+    return () => window.clearTimeout(t);
+  }, [running, i, n]);
 
   const onKey = (e: React.KeyboardEvent) => {
     // RTL: the "next" slide is to the left
@@ -146,6 +160,9 @@ export function NahalaCarousel() {
         <div className="flex items-center gap-2">
           <ArrowButton label={c.prev} onClick={() => go(i - 1)} direction="back" />
           <ArrowButton label={c.next} onClick={() => go(i + 1)} direction="forward" />
+          {autoplay && !reducedMotion && (
+            <PauseButton paused={paused} onToggle={() => setPaused((v) => !v)} label="החלפת התמונות" />
+          )}
         </div>
         <ol className="order-last w-full flex flex-wrap items-center gap-x-5 gap-y-1 lg:order-none lg:w-auto">
           {slides.map((s, k) => (
@@ -166,7 +183,7 @@ export function NahalaCarousel() {
             </li>
           ))}
         </ol>
-        <span aria-live="polite" className="ms-auto font-tzar text-[0.95rem] tabular text-ink-soft ltr">
+        <span aria-live={running ? "off" : "polite"} className="ms-auto font-tzar text-[0.95rem] tabular text-ink-soft ltr">
           {pad(i)} / {pad(n - 1)}
         </span>
       </div>
