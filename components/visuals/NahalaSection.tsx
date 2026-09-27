@@ -118,6 +118,12 @@ export function NahalaSection({ className }: { className?: string }) {
       <m.g {...fade(1.2)}>
         <rect x={x(BUFFER[1])} y={GY - 10} width={(BUFFER[1] - BUFFER[0]) * PPM} height="10" fill="url(#nahala-sec-hatch)" />
         <text x={(x(BUFFER[0]) + x(BUFFER[1])) / 2} y={GY - 18} textAnchor="middle" direction="rtl" fontSize="13" fill={soft}>{s.labels.buffer}</text>
+        {/* minimum buffer, stacked above: the gap between the ground and agro brackets is narrow */}
+        <text textAnchor="middle" direction="rtl" fontSize="12.5" fill={ink} fillOpacity="0.75">
+          {s.labels.bufferNote.map((line, i) => (
+            <tspan key={line} x={(x(BUFFER[0]) + x(BUFFER[1])) / 2} y={GY - 70 + i * 16} fontWeight={i === 0 ? 700 : 400}>{line}</tspan>
+          ))}
+        </text>
       </m.g>
 
       {/* 03: elevated agrivoltaic rows with crops growing underneath */}
