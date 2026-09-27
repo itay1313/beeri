@@ -53,7 +53,7 @@ export function NahalaSection({ className }: { className?: string }) {
   const panel = "var(--color-amber-500)";
 
   /** bracket over a zone: option number + title, plus its width under the ground line */
-  const zone = (from: number, to: number, n: string, title: string, size: string, delay: number) => {
+  const zone = (from: number, to: number, n: string, title: string, size: string | null, delay: number) => {
     const a = x(to);
     const b = x(from);
     const mid = (a + b) / 2;
@@ -63,8 +63,12 @@ export function NahalaSection({ className }: { className?: string }) {
         {/* rtl: anchor "start" is the right edge, so both run leftwards from the bracket's right end */}
         <text x={b} y={106} textAnchor="start" direction="rtl" fontSize="17" fontFamily="var(--font-tzar)" fontWeight="700" fill={amber}>{n}</text>
         <text x={b - 26} y={106} textAnchor="start" direction="rtl" fontSize="17" fill={ink}>{title}</text>
-        <path d={`M ${a} ${GY + 14} L ${b} ${GY + 14} M ${a} ${GY + 9} L ${a} ${GY + 19} M ${b} ${GY + 9} L ${b} ${GY + 19}`} stroke={soft} strokeOpacity="0.7" strokeWidth="1" />
-        <text x={mid} y={GY + 38} textAnchor="middle" direction="rtl" fontSize="14" fill={soft}>{size}</text>
+        {size && (
+          <>
+            <path d={`M ${a} ${GY + 14} L ${b} ${GY + 14} M ${a} ${GY + 9} L ${a} ${GY + 19} M ${b} ${GY + 9} L ${b} ${GY + 19}`} stroke={soft} strokeOpacity="0.7" strokeWidth="1" />
+            <text x={mid} y={GY + 38} textAnchor="middle" direction="rtl" fontSize="14" fill={soft}>{size}</text>
+          </>
+        )}
       </m.g>
     );
   };
@@ -86,6 +90,12 @@ export function NahalaSection({ className }: { className?: string }) {
       <m.g stroke={ink} strokeOpacity="0.45" strokeWidth="1.1" fill="none" {...fade(0.2)}>
         <path d={`M ${x(HOUSE[0])} ${GY} L ${x(HOUSE[0])} ${y(3.2)} L ${x(6)} ${y(5.6)} L ${x(HOUSE[1])} ${y(3.2)} L ${x(HOUSE[1])} ${GY}`} />
         <text x={x(6)} y={y(1.4)} textAnchor="middle" direction="rtl" fontSize="13" fill={soft} stroke="none">{s.labels.home}</text>
+      </m.g>
+
+      {/* residence area, under the ground line: rtl "start" is the right edge, so the label runs leftwards and stays inside the frame */}
+      <m.g {...fade(0.4)}>
+        <path d={`M ${x(HOUSE[1])} ${GY + 14} L ${x(HOUSE[0])} ${GY + 14} M ${x(HOUSE[1])} ${GY + 9} L ${x(HOUSE[1])} ${GY + 19} M ${x(HOUSE[0])} ${GY + 9} L ${x(HOUSE[0])} ${GY + 19}`} stroke={soft} strokeOpacity="0.7" strokeWidth="1" />
+        <text x={x(HOUSE[0])} y={GY + 38} textAnchor="start" direction="rtl" fontSize="14" fill={soft}>{s.sizes.home}</text>
       </m.g>
 
       {/* 01: farm building, panels on the south slope */}
@@ -129,15 +139,10 @@ export function NahalaSection({ className }: { className?: string }) {
         </m.g>
       ))}
 
-      {zone(BARN[0], BARN[1], opts[0].n, opts[0].title, s.sizes.roof, 0.7)}
+      {zone(BARN[0], BARN[1], opts[0].n, opts[0].title, null, 0.7)}
       {zone(GROUND[0], GROUND[1], opts[1].n, opts[1].title, s.sizes.ground, 1.1)}
       {zone(AGRO[0], AGRO[1], opts[2].n, opts[2].title, s.sizes.agro, 1.9)}
 
-      {/* scale bar: 10 m */}
-      <m.g {...fade(2.2)}>
-        <path d={`M ${x(-2)} ${GY + 52} L ${x(8)} ${GY + 52} M ${x(-2)} ${GY + 47} L ${x(-2)} ${GY + 57} M ${x(8)} ${GY + 47} L ${x(8)} ${GY + 57}`} stroke={ink} strokeOpacity="0.6" strokeWidth="1" />
-        <text x={x(8) - 8} y={GY + 57} textAnchor="start" direction="rtl" fontSize="13" fill={soft}>{s.labels.scale}</text>
-      </m.g>
     </svg>
   );
 }
