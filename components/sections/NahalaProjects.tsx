@@ -83,14 +83,14 @@ export function NahalaProjects() {
         <div className="sticky top-28 flex flex-col items-center">
           <p className="text-label text-ink">מיקום בנחלה</p>
           <p className="mt-3 text-small text-ink-soft">אזור המגורים</p>
-          <div className="relative mt-2 h-[min(calc(100svh-21rem),40rem)] aspect-[115/1076] border border-ink/70 bg-cell-950 overflow-hidden">
+          <div className="relative mt-2 h-[min(calc(100svh-19rem),44rem)] aspect-[115/820] border border-ink/70 bg-cell-950 overflow-hidden">
             {nahalaLocationMaps.map((m, k) => (
               <Image
                 key={m.src}
                 src={m.src}
                 alt=""
                 fill
-                sizes="72px"
+                sizes="96px"
                 className={cn("object-cover transition-opacity duration-500", k === active ? "opacity-100" : "opacity-0")}
               />
             ))}
