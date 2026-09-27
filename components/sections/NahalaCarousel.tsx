@@ -7,7 +7,8 @@ import { cn } from "@/lib/cn";
 import { useCapabilities } from "@/components/motion/useCapabilities";
 import { PauseButton } from "@/components/ui/PauseButton";
 
-/** autoplay step */
+/** autoplay: the opening frame holds longer, then every 3 s */
+const FIRST_MS = 7000;
 const STEP_MS = 3000;
 
 /**
@@ -15,7 +16,7 @@ const STEP_MS = 3000;
  * The badge, the option chips and the location mini-map are baked into each frame, so on wide
  * screens the text sits in the frame's dark band at the positions of the client's captioned
  * versions (container-query units keep it in step with the image). Below `lg` the text moves
- * under the frame. Arrows, index tabs, keyboard and swipe; with `autoplay` it also advances every 3 s,
+ * under the frame. Arrows, index tabs, keyboard and swipe; with `autoplay` it also advances (7 s on the opening frame, then every 3 s),
  * with a pause toggle (starts paused under reduced motion). Crossfade, none under reduced motion.
  */
 export function NahalaCarousel({ autoplay = false }: { autoplay?: boolean }) {
@@ -34,7 +35,7 @@ export function NahalaCarousel({ autoplay = false }: { autoplay?: boolean }) {
   const running = autoplay && !paused && !reducedMotion;
   useEffect(() => {
     if (!running) return;
-    const t = window.setTimeout(() => setI((k) => (k + 1) % n), STEP_MS);
+    const t = window.setTimeout(() => setI((k) => (k + 1) % n), i === 0 ? FIRST_MS : STEP_MS);
     return () => window.clearTimeout(t);
   }, [running, i, n]);
 
