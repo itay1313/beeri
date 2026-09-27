@@ -5,10 +5,8 @@ import { ImageCycle } from "@/components/motion/ImageCycle";
 import { ImageReveal } from "@/components/motion/ImageReveal";
 import { MaskedHeading } from "@/components/motion/MaskedHeading";
 import { Reveal } from "@/components/motion/Reveal";
-import { BrandFilm } from "@/components/ui/BrandFilm";
 
-/** Four words stacked at display size beside a tall photograph, the one paragraph that says why BE'ERI exists,
- * then the company film right under its punchline ("כאן בארי אנרגיה נכנסת לתמונה"). */
+/** Four words stacked at display size beside a tall photograph, and the one paragraph that says why BE'ERI exists. */
 export function Positioning() {
   const p = home.positioning;
   return (
@@ -35,11 +33,6 @@ export function Positioning() {
           </div>
         </div>
 
-        <div className="mt-20 lg:mt-28">
-          <ImageReveal>
-            <BrandFilm title={p.film.title} caption={p.film.caption} playLabel={p.film.play} />
-          </ImageReveal>
-        </div>
       </div>
     </section>
   );
