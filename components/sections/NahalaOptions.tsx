@@ -1,7 +1,5 @@
 import { home } from "@/content/home";
-import { images } from "@/content/images";
 import { site } from "@/content/site";
-import { ImageRow } from "@/components/ui/ImageRow";
 import { PlotSpecSheet } from "@/components/visuals/PlotSpecSheet";
 import { Statement } from "@/components/ui/Statement";
 import { Button } from "@/components/ui/Button";
@@ -9,11 +7,9 @@ import { Reveal } from "@/components/motion/Reveal";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Magnetic } from "@/components/motion/Magnetic";
 import { NahalaScale } from "./NahalaScale";
+import { NahalaProjects } from "./NahalaProjects";
 
-/** roof, one dunam on the ground, agro up to 10 dunam: all three at farm scale, same 3:2 frame */
-const optionImages = [images.barnBess, images.groundDunam, images.agrivoltaicPlot] as const;
-
-/** /nahala: the three land options as photo rows, the same three at one scale, then the TAMA spec sheet. */
+/** /nahala: the four projects from the header carousel with a pinned location rail, the same three at one scale, then the TAMA spec sheet. */
 export function NahalaOptions() {
   const l = home.land;
   return (
@@ -22,12 +18,8 @@ export function NahalaOptions() {
         <Reveal>
           <SectionHeading index={l.page.options.index} eyebrow={l.page.options.eyebrow} title={l.heading} />
         </Reveal>
-        <div className="mt-12 lg:mt-16 border-b border-line">
-          {l.options.map((o, i) => (
-            <Reveal key={o.n}>
-              <ImageRow index={o.n} title={o.title} body={o.body} image={optionImages[i]} flip={i % 2 === 1} />
-            </Reveal>
-          ))}
+        <div className="mt-12 lg:mt-16">
+          <NahalaProjects />
         </div>
 
         <Reveal className="mt-20 lg:mt-28">

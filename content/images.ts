@@ -124,3 +124,13 @@ export const industrialRoof: SiteImage = {
   placeholder: false,
   credit: "client (Drive, 2026-09-25)",
 };
+
+/**
+ * /nahala projects section: the "מיקום בנחלה" mini-map cut from each carousel frame (the
+ * client's highlight in amber), turned upright so the residence is at the top. 115 × 1076.
+ */
+export const nahalaLocationMaps = [1, 2, 3, 4].map((k) => ({
+  src: `/images/nahala/map-0${k}.jpg`,
+  width: 115,
+  height: 1076,
+}));

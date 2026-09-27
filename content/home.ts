@@ -173,7 +173,7 @@ export const home = {
     heading: "אפשרויות לניצול השטח החקלאי לפרויקט סולארי בנחלה",
     teaserLink: "כל הפרטים על חלקה א׳",
     page: {
-      options: { index: "01", eyebrow: "שלוש דרכים" },
+      options: { index: "01", eyebrow: "ארבעה פרויקטים" },
       conditions: { index: "02", eyebrow: "התנאים" },
       /**
        * Carousel of the client's aerial frames (Drive, 2026-09-25): one nahala, the four projects
