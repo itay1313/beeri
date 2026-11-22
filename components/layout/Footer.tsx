@@ -35,7 +35,10 @@ export function Footer({ sunrise = true }: { sunrise?: boolean }) {
         </div>
         <div className="container-page py-5 border-t border-line-dark flex flex-wrap justify-between gap-4 text-[0.8rem] text-limestone/60">
           <span>{home.footer.legal}</span>
-          <Link href="/accessibility" className="inline-flex min-h-6 items-center hover:text-limestone">{home.footer.accessibility}</Link>
+          <div className="flex flex-wrap gap-x-5">
+            <Link href="/privacy" className="inline-flex min-h-6 items-center hover:text-limestone">{home.footer.privacy}</Link>
+            <Link href="/accessibility" className="inline-flex min-h-6 items-center hover:text-limestone">{home.footer.accessibility}</Link>
+          </div>
         </div>
         <Wordmark className="border-t border-line-dark pt-6" />
         <div className="container-page py-2 text-center text-[0.65rem] tracking-wide text-limestone/40">
