@@ -76,8 +76,7 @@ export default function PrivacyPage() {
             <p>
               לפי חוק הגנת הפרטיות, התשמ״א־1981, את/ה רשאי/ת לעיין במידע עליך, לבקש לתקן אותו או לבקש למחוק אותו, וכן
               לבקש שלא נפנה אליך יותר. לפניות:{" "}
-              <a href={`mailto:${contact.email}`} className={linkClass}>{contact.email}</a> או{" "}
-              <a href={`tel:${contact.phone}`} className={linkClass}>{contact.phoneDisplay}</a>.
+              <a href={`mailto:${contact.email}`} className={linkClass}>{contact.email}</a>.
             </p>
           </div>
 
